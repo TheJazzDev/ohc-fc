@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Work+Sans:wght@400;500&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: oklch(0.87 0.22 125); }
+    a:hover { color: oklch(0.92 0.2 125); }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 0.85; transform: scale(1.06); }
+    }
+  </style>
+</helmet>
+<div style="width:390px; height:900px; background: oklch(0.16 0.01 260); font-family: 'Work Sans', system-ui, sans-serif; color: oklch(0.96 0.01 260); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding: 20px 20px 0 20px;">
+    <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; letter-spacing:0.04em;">OHC FC</div>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="oklch(0.96 0.01 260)" stroke-width="2" stroke-linecap="round">
+      <line x1="4" y1="7" x2="20" y2="7"></line>
+      <line x1="4" y1="12" x2="20" y2="12"></line>
+      <line x1="4" y1="17" x2="20" y2="17"></line>
+    </svg>
+  </div>
+
+  <div style="position:relative; flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 0 24px;">
+    <div style="position:absolute; width:280px; height:280px; border-radius:50%; background: radial-gradient(circle, oklch(0.87 0.22 125 / 0.35), transparent 70%); animation: glow-pulse 3.5s ease-in-out infinite; top:38%; left:50%; transform:translate(-50%,-50%);"></div>
+
+    <svg width="150" height="150" viewBox="0 0 150 150" style="position:relative; margin-top: -40px;">
+      <circle cx="75" cy="75" r="62" fill="oklch(0.22 0.02 260)" stroke="oklch(0.87 0.22 125)" stroke-width="1.5"></circle>
+      <circle cx="75" cy="75" r="62" fill="url(#sheen)"></circle>
+      <path d="M75 30 L95 48 L88 74 L62 74 L55 48 Z" fill="none" stroke="oklch(0.87 0.22 125)" stroke-width="1.5"></path>
+      <path d="M75 30 L55 48 M75 30 L95 48 M55 48 L38 62 M95 48 L112 62 M62 74 L48 96 M88 74 L102 96" stroke="oklch(0.87 0.22 125 / 0.6)" stroke-width="1.2" fill="none"></path>
+      <defs>
+        <radialGradient id="sheen" cx="35%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="oklch(0.96 0.01 260 / 0.25)"></stop>
+          <stop offset="100%" stop-color="transparent"></stop>
+        </radialGradient>
+      </defs>
+    </svg>
+
+    <div style="text-align:center; margin-top: 28px; position:relative;">
+      <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:40px; line-height:0.98; letter-spacing:0.01em; text-transform:uppercase;">Home of<br>the badge</div>
+      <div style="margin-top:12px; font-size:14px; color: oklch(0.7 0.02 260); letter-spacing:0.02em;">Est. 1987 · Non-League · Proud &amp; Loud</div>
+    </div>
+  </div>
+
+  <div style="padding: 0 20px 16px 20px; display:flex; flex-direction:column; gap:12px;">
+    <div style="background: oklch(0.2 0.015 260); border:1px solid oklch(0.87 0.22 125 / 0.3); border-radius:4px; padding:14px 16px; position:relative; overflow:hidden;">
+      <div style="position:absolute; top:0; right:0; width:60px; height:60px; background: oklch(0.87 0.22 125); clip-path: polygon(100% 0, 0 0, 100% 100%);"></div>
+      <div style="font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:0.12em; color: oklch(0.87 0.22 125);">NEXT MATCH</div>
+      <div style="font-family:'Oswald',sans-serif; font-weight:600; font-size:19px; margin-top:4px;">vs Thornbridge Athletic</div>
+      <div style="font-size:12px; color: oklch(0.65 0.02 260); margin-top:2px;">Sat 14 Sep · 3:00PM · League Cup</div>
+    </div>
+
+    <div style="background: oklch(0.2 0.015 260); border-radius:4px; padding:12px 14px; display:flex; align-items:center; gap:12px;">
+      <div style="width:44px; height:44px; border-radius:50%; background: linear-gradient(135deg, oklch(0.87 0.22 125), oklch(0.5 0.15 150)); display:flex; align-items:center; justify-content:center; font-family:'Oswald',sans-serif; font-weight:700; font-size:14px; color: oklch(0.16 0.01 260); flex-shrink:0;">JA</div>
+      <div>
+        <div style="font-weight:500; font-size:14px;">J. Adeyemi</div>
+        <div style="font-size:11px; color: oklch(0.6 0.02 260); font-family:'Oswald',sans-serif; letter-spacing:0.04em;">#9 · FORWARD</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

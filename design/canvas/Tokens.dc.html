@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<div style="width:900px; min-height:1000px; background: oklch(0.16 0.01 260); font-family:'Work Sans', system-ui, sans-serif; color: oklch(0.96 0.01 260); padding: 40px;">
+
+  <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:14px; letter-spacing:0.12em; color: oklch(0.87 0.22 125); text-transform:uppercase;">OHC FC — Design System</div>
+  <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:32px; margin-top:6px;">Tokens</div>
+
+  <div style="font-size:12px; letter-spacing:0.1em; color: oklch(0.6 0.02 260); text-transform:uppercase; margin-top:36px; margin-bottom:14px;">Color</div>
+  <div style="display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:16px;">
+    <div>
+      <div style="height:64px; border-radius:8px; background: oklch(0.16 0.01 260); border:1px solid oklch(0.96 0.01 260 / 0.15);"></div>
+      <div style="font-size:12px; margin-top:6px;">Background</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260);">oklch(0.16 0.01 260)</div>
+    </div>
+    <div>
+      <div style="height:64px; border-radius:8px; background: oklch(0.20 0.015 260);"></div>
+      <div style="font-size:12px; margin-top:6px;">Surface</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260);">oklch(0.20 0.015 260)</div>
+    </div>
+    <div>
+      <div style="height:64px; border-radius:8px; background: oklch(0.24 0.015 260);"></div>
+      <div style="font-size:12px; margin-top:6px;">Surface raised</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260);">oklch(0.24 0.015 260)</div>
+    </div>
+    <div>
+      <div style="height:64px; border-radius:8px; background: oklch(0.96 0.01 260);"></div>
+      <div style="font-size:12px; margin-top:6px;">Foreground</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260);">oklch(0.96 0.01 260)</div>
+    </div>
+    <div>
+      <div style="height:64px; border-radius:8px; background: oklch(0.65 0.02 260);"></div>
+      <div style="font-size:12px; margin-top:6px;">Muted text</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260);">oklch(0.65 0.02 260)</div>
+    </div>
+    <div>
+      <div style="height:64px; border-radius:8px; background: oklch(0.87 0.22 125); border:1px solid oklch(0.87 0.22 125);"></div>
+      <div style="font-size:12px; margin-top:6px;">Accent (Floodlight)</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260);">oklch(0.87 0.22 125)</div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; letter-spacing:0.1em; color: oklch(0.6 0.02 260); text-transform:uppercase; margin-top:40px; margin-bottom:14px;">Type scale — mobile-first (Tailwind classes noted)</div>
+  <div style="display:flex; flex-direction:column; gap:18px;">
+    <div>
+      <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:40px; line-height:1;">Home of the badge</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260); margin-top:4px;">Hero title — Oswald 700 — text-2xl sm:text-3xl md:text-4xl lg:text-5xl</div>
+    </div>
+    <div>
+      <div style="font-family:'Oswald',sans-serif; font-weight:600; font-size:26px; line-height:1;">Section heading</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260); margin-top:4px;">Oswald 600 — text-xl sm:text-2xl md:text-3xl</div>
+    </div>
+    <div>
+      <div style="font-family:'Oswald',sans-serif; font-weight:500; font-size:18px; line-height:1;">Card title</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260); margin-top:4px;">Oswald 500 — text-lg sm:text-xl</div>
+    </div>
+    <div>
+      <div style="font-size:15px; line-height:1.5;">Body text sits on Work Sans for readability across long-form squad bios and match reports.</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260); margin-top:4px;">Work Sans 400 — text-sm sm:text-base md:text-lg</div>
+    </div>
+    <div>
+      <div style="font-size:12px; letter-spacing:0.05em; color: oklch(0.7 0.02 260);">Caption / label text</div>
+      <div style="font-size:11px; color: oklch(0.55 0.02 260); margin-top:4px;">Work Sans 400 — text-xs sm:text-sm</div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; letter-spacing:0.1em; color: oklch(0.6 0.02 260); text-transform:uppercase; margin-top:40px; margin-bottom:14px;">Spacing scale (px)</div>
+  <div style="display:flex; align-items:flex-end; gap:14px;">
+    <div><div style="width:4px; height:4px; background: oklch(0.87 0.22 125);"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">4</div></div>
+    <div><div style="width:8px; height:8px; background: oklch(0.87 0.22 125);"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">8</div></div>
+    <div><div style="width:12px; height:12px; background: oklch(0.87 0.22 125);"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">12</div></div>
+    <div><div style="width:16px; height:16px; background: oklch(0.87 0.22 125);"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">16</div></div>
+    <div><div style="width:24px; height:24px; background: oklch(0.87 0.22 125);"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">24</div></div>
+    <div><div style="width:32px; height:32px; background: oklch(0.87 0.22 125);"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">32</div></div>
+    <div><div style="width:48px; height:48px; background: oklch(0.87 0.22 125);"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">48</div></div>
+  </div>
+
+  <div style="font-size:12px; letter-spacing:0.1em; color: oklch(0.6 0.02 260); text-transform:uppercase; margin-top:40px; margin-bottom:14px;">Radius scale</div>
+  <div style="display:flex; align-items:center; gap:20px;">
+    <div><div style="width:48px; height:48px; background: oklch(0.24 0.015 260); border-radius:4px;"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">4</div></div>
+    <div><div style="width:48px; height:48px; background: oklch(0.24 0.015 260); border-radius:8px;"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">8</div></div>
+    <div><div style="width:48px; height:48px; background: oklch(0.24 0.015 260); border-radius:14px;"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">14</div></div>
+    <div><div style="width:48px; height:48px; background: oklch(0.24 0.015 260); border-radius:9999px;"></div><div style="font-size:10px; color: oklch(0.55 0.02 260); margin-top:6px;">Full (pill)</div></div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

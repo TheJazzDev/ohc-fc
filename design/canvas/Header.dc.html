@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: oklch(0.87 0.22 125); text-decoration: none; }
+    a:hover { color: oklch(0.92 0.2 125); }
+  </style>
+</helmet>
+<div style="width:100%; background: oklch(0.16 0.01 260); font-family: 'Work Sans', system-ui, sans-serif; display:flex; align-items:center; justify-content:space-between; padding: 18px 24px; border-bottom: 1px solid oklch(0.96 0.01 260 / 0.1);">
+  <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:20px; letter-spacing:0.03em; color: oklch(0.96 0.01 260);">OHC FC</div>
+
+  <sc-if value="{{isWide}}" hint-placeholder-val="{{true}}">
+    <nav style="display:flex; align-items:center;">
+      <a href="#" style="font-size:14px; color: oklch(0.96 0.01 260);">Home</a>
+      <a href="#" style="font-size:14px; margin-left:28px; color: oklch(0.85 0.01 260);">Squad</a>
+      <a href="#" style="font-size:14px; margin-left:28px; color: oklch(0.85 0.01 260);">Matchday</a>
+      <a href="#" style="font-size:14px; margin-left:28px; color: oklch(0.85 0.01 260);">Fixtures</a>
+      <a href="#" style="font-size:14px; margin-left:28px; color: oklch(0.85 0.01 260);">News</a>
+      <a href="#" style="font-size:14px; margin-left:28px; color: oklch(0.85 0.01 260);">Club</a>
+    </nav>
+  </sc-if>
+  <sc-if value="{{isMobile}}" hint-placeholder-val="{{false}}">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="oklch(0.96 0.01 260)" stroke-width="2" stroke-linecap="round">
+      <line x1="4" y1="7" x2="20" y2="7"></line>
+      <line x1="4" y1="12" x2="20" y2="12"></line>
+      <line x1="4" y1="17" x2="20" y2="17"></line>
+    </svg>
+  </sc-if>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"variant":{"editor":"enum","options":["mobile","wide"],"default":"mobile","tsType":"string","section":"Behavior"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const variant = this.props.variant ?? 'mobile';
+    const isWide = variant === 'wide';
+    return { isWide, isMobile: !isWide };
+  }
+}
+</script>
+</body>
+</html>

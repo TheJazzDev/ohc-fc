@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<div style="width:100%; height:100%; font-family:'Work Sans', system-ui, sans-serif; color: oklch(0.96 0.01 260);">
+  <div style="font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color: oklch(0.65 0.02 260); margin-bottom:10px;">Substitutes</div>
+
+  <sc-if value="{{isRow}}" hint-placeholder-val="{{true}}">
+    <div style="display:flex; gap:14px; overflow-x:auto; padding-bottom:4px;">
+      <sc-for list="{{bench}}" as="p" hint-placeholder-count="5">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0;">
+          <svg width="30" height="32" viewBox="0 0 44 48">
+            <path d="M14 2 L4 10 L4 18 L10 16 L10 46 L34 46 L34 16 L40 18 L40 10 L30 2 L28 4 Q22 8 16 4 Z" fill="oklch(0.24 0.015 260)" stroke="oklch(0.87 0.22 125 / 0.6)" stroke-width="1.5"></path>
+            <text x="22" y="33" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="16" fill="oklch(0.96 0.01 260)">{{p.number}}</text>
+          </svg>
+          <div style="font-size:10px; color: oklch(0.85 0.01 260);">{{p.name}}</div>
+          <div style="font-size:9px; color: oklch(0.55 0.02 260); letter-spacing:0.04em;">{{p.position}}</div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{isColumn}}" hint-placeholder-val="{{false}}">
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <sc-for list="{{bench}}" as="p" hint-placeholder-count="5">
+        <div style="display:flex; align-items:center; gap:12px; background: oklch(0.20 0.015 260); border-radius:10px; padding:10px 14px;">
+          <svg width="28" height="30" viewBox="0 0 44 48" style="flex-shrink:0;">
+            <path d="M14 2 L4 10 L4 18 L10 16 L10 46 L34 46 L34 16 L40 18 L40 10 L30 2 L28 4 Q22 8 16 4 Z" fill="oklch(0.24 0.015 260)" stroke="oklch(0.87 0.22 125 / 0.6)" stroke-width="1.5"></path>
+            <text x="22" y="33" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="16" fill="oklch(0.96 0.01 260)">{{p.number}}</text>
+          </svg>
+          <div>
+            <div style="font-size:13px; font-weight:500;">{{p.name}}</div>
+            <div style="font-size:10px; color: oklch(0.6 0.02 260); letter-spacing:0.04em; margin-top:1px;">{{p.position}}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"direction":{"editor":"enum","options":["row","column"],"default":"row","section":"Layout"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const direction = this.props.direction ?? 'row';
+    return {
+      isRow: direction === 'row',
+      isColumn: direction === 'column',
+      bench: [
+        { number: 12, name: 'Farrell', position: 'GK' },
+        { number: 14, name: 'Musa', position: 'DF' },
+        { number: 16, name: 'Eze', position: 'MF' },
+        { number: 17, name: 'Achara', position: 'MF' },
+        { number: 19, name: 'Ibe', position: 'FW' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

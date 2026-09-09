@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@400;500;600&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    a { color: oklch(0.42 0.09 150); }
+    a:hover { color: oklch(0.35 0.09 150); }
+  </style>
+</helmet>
+<div style="width:390px; height:900px; background: oklch(0.96 0.015 85); font-family: 'Work Sans', system-ui, sans-serif; color: oklch(0.22 0.02 150); overflow: hidden; position: relative; display: flex; flex-direction: column;">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding: 22px 24px 0 24px; border-bottom: 1px solid oklch(0.22 0.02 150 / 0.12); padding-bottom: 16px;">
+    <div style="font-family:'Instrument Serif', serif; font-style:italic; font-size:24px;">OHC FC</div>
+    <div style="display:flex; gap:16px; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color: oklch(0.45 0.03 150);">
+      <span>Squad</span><span>Fixtures</span>
+    </div>
+  </div>
+
+  <div style="flex-grow:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 28px 28px 0 28px; text-align:center;">
+    <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color: oklch(0.75 0.12 80);">Est. 1987</div>
+    <div style="font-family:'Instrument Serif', serif; font-size:52px; line-height:1.02; margin-top:10px;">Home of<br>the badge</div>
+    <div style="margin-top:14px; font-size:14px; color: oklch(0.4 0.03 150); max-width:260px; line-height:1.5;">A century-old crest, a Saturday-terrace heart. Non-League football, played properly.</div>
+
+    <svg width="130" height="130" viewBox="0 0 130 130" style="margin-top:28px;">
+      <circle cx="65" cy="65" r="58" fill="none" stroke="oklch(0.42 0.09 150)" stroke-width="1"></circle>
+      <circle cx="65" cy="65" r="46" fill="oklch(0.42 0.09 150 / 0.06)" stroke="oklch(0.75 0.12 80)" stroke-width="1"></circle>
+      <path d="M65 30 L65 100 M35 65 L95 65" stroke="oklch(0.42 0.09 150 / 0.3)" stroke-width="1"></path>
+      <text x="65" y="60" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="22" fill="oklch(0.22 0.02 150)">O</text>
+      <text x="65" y="82" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="22" fill="oklch(0.22 0.02 150)">HC</text>
+    </svg>
+  </div>
+
+  <div style="padding: 24px 24px 20px 24px; display:flex; flex-direction:column; gap:10px;">
+    <div style="background: oklch(0.99 0.005 85); border:1px solid oklch(0.22 0.02 150 / 0.15); padding:16px 18px;">
+      <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color: oklch(0.5 0.05 150);">Next fixture</div>
+      <div style="font-family:'Instrument Serif', serif; font-size:22px; margin-top:4px;">vs Thornbridge Athletic</div>
+      <div style="font-size:12px; color: oklch(0.45 0.03 150); margin-top:2px;">Saturday 14 September, 3:00pm — League Cup</div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:14px; padding: 10px 4px;">
+      <div style="width:46px; height:46px; border-radius:50%; background: oklch(0.9 0.03 85); border: 1.5px solid oklch(0.75 0.12 80); display:flex; align-items:center; justify-content:center; font-family:'Instrument Serif', serif; font-style:italic; font-size:16px; flex-shrink:0;">JA</div>
+      <div>
+        <div style="font-weight:500; font-size:14px;">J. Adeyemi</div>
+        <div style="font-size:11px; color: oklch(0.5 0.03 150); letter-spacing:0.03em;">No. 9 — Forward</div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

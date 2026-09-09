@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<div style="width:1440px; height:900px; background: oklch(0.16 0.01 260); font-family:'Work Sans', system-ui, sans-serif; color: oklch(0.96 0.01 260); overflow:hidden; display:flex; flex-direction:column;">
+
+  <dc-import name="Header" variant="wide" hint-size="1440px,72px"></dc-import>
+
+  <div style="flex-grow:1; display:flex; align-items:center; padding: 0 80px; gap:40px;">
+    <div style="flex:1; max-width:520px;">
+      <div style="font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:0.16em; color: oklch(0.87 0.22 125); text-transform:uppercase;">Est. 1987 · Non-League</div>
+      <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:72px; line-height:0.96; text-transform:uppercase; margin-top:12px;">Home of<br>the badge</div>
+      <div style="margin-top:18px; font-size:16px; color: oklch(0.65 0.02 260); line-height:1.6; max-width:420px;">Proud, loud, and built on a Saturday-terrace heart. Follow OHC FC through every matchday, every lineup, every result.</div>
+      <div style="margin-top:32px; max-width:440px;">
+        <dc-import name="FixtureCard" hint-size="440px,120px"></dc-import>
+      </div>
+    </div>
+
+    <div style="flex:1; display:flex; align-items:center; justify-content:center;">
+      <div style="width:480px; height:480px;">
+        <dc-import name="Hero3D" size="300" glow-size="440" hint-size="480px,480px"></dc-import>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

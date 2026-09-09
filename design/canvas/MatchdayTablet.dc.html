@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<div style="width:834px; height:1194px; background: oklch(0.16 0.01 260); font-family:'Work Sans', system-ui, sans-serif; color: oklch(0.96 0.01 260); overflow:hidden; display:flex; flex-direction:column;">
+
+  <dc-import name="Header" variant="wide" hint-size="834px,64px"></dc-import>
+
+  <div style="padding: 32px 60px 0 60px; flex-grow:1; display:flex; flex-direction:column; align-items:center;">
+    <div style="width:100%; max-width:660px;">
+      <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:34px;">vs Thornbridge Athletic</div>
+      <div style="font-size:13px; color: oklch(0.65 0.02 260); margin-top:4px;">Saturday 14 September · 3:00PM · League Cup</div>
+      <div style="display:flex; gap:10px; margin-top:14px;">
+        <div style="background: oklch(0.87 0.22 125); color: oklch(0.16 0.01 260); font-family:'Oswald',sans-serif; font-weight:600; font-size:12px; letter-spacing:0.06em; padding:6px 14px; border-radius:20px;">STARTING XI</div>
+        <div style="border:1px solid oklch(0.96 0.01 260 / 0.25); color: oklch(0.85 0.01 260); font-family:'Oswald',sans-serif; font-weight:600; font-size:12px; letter-spacing:0.06em; padding:6px 14px; border-radius:20px;">4-3-3</div>
+      </div>
+
+      <div style="margin-top:24px; height:600px;">
+        <dc-import name="PitchView" hint-size="660px,600px"></dc-import>
+      </div>
+
+      <div style="margin-top:28px;">
+        <dc-import name="BenchStrip" direction="row" hint-size="660px,112px"></dc-import>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

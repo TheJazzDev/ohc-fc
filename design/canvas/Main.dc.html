@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Work+Sans:wght@400;500&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<div style="width:390px; height:900px; background: oklch(0.16 0.01 260); font-family:'Work Sans', system-ui, sans-serif; color: oklch(0.96 0.01 260); overflow:hidden; display:flex; flex-direction:column;">
+
+  <dc-import name="Header" variant="mobile" hint-size="390px,58px"></dc-import>
+
+  <div style="flex-grow:1; display:flex; flex-direction:column;">
+    <div style="height:280px;">
+      <dc-import name="Hero3D" size="150" glow-size="260" hint-size="390px,280px"></dc-import>
+    </div>
+
+    <div style="text-align:center; padding: 8px 24px 0 24px;">
+      <div style="font-family:'Oswald',sans-serif; font-weight:700; font-size:38px; line-height:0.98; text-transform:uppercase;">Home of<br>the badge</div>
+      <div style="margin-top:10px; font-size:13px; color: oklch(0.65 0.02 260); letter-spacing:0.02em;">Est. 1987 · Non-League · Proud &amp; Loud</div>
+    </div>
+
+    <div style="padding: 24px 20px 0 20px;">
+      <dc-import name="FixtureCard" hint-size="350px,110px"></dc-import>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

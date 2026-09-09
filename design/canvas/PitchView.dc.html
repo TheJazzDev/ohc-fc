@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .corner-arc { position: absolute; width: 2.6%; height: 2.6%; border: 1.5px solid oklch(0.96 0.01 260 / 0.32); }
+  </style>
+</helmet>
+<div style="width:100%; height:100%; position:relative; background: linear-gradient(180deg, oklch(0.36 0.1 150), oklch(0.26 0.08 150)); border-radius:16px; overflow:hidden;">
+
+  <div style="position:absolute; inset:4%; border:1.5px solid oklch(0.96 0.01 260 / 0.32); border-radius:4px;"></div>
+  <div style="position:absolute; left:4%; right:4%; top:50%; height:1.5px; background: oklch(0.96 0.01 260 / 0.32);"></div>
+  <div style="position:absolute; left:50%; top:50%; width:17%; aspect-ratio:1; border:1.5px solid oklch(0.96 0.01 260 / 0.32); border-radius:50%; transform:translate(-50%,-50%);"></div>
+  <div style="position:absolute; left:50%; top:50%; width:6px; height:6px; margin:-3px; background: oklch(0.96 0.01 260 / 0.5); border-radius:50%;"></div>
+
+  <div style="position:absolute; left:26%; top:4%; width:48%; height:13%; border:1.5px solid oklch(0.96 0.01 260 / 0.32); border-top:none;"></div>
+  <div style="position:absolute; left:38%; top:4%; width:24%; height:6%; border:1.5px solid oklch(0.96 0.01 260 / 0.32); border-top:none;"></div>
+  <div style="position:absolute; left:26%; bottom:4%; width:48%; height:13%; border:1.5px solid oklch(0.96 0.01 260 / 0.32); border-bottom:none;"></div>
+  <div style="position:absolute; left:38%; bottom:4%; width:24%; height:6%; border:1.5px solid oklch(0.96 0.01 260 / 0.32); border-bottom:none;"></div>
+
+  <div class="corner-arc" style="left:4%; top:4%; border-radius:0 0 100% 0; border-top:none; border-left:none;"></div>
+  <div class="corner-arc" style="right:4%; top:4%; border-radius:0 0 0 100%; border-top:none; border-right:none;"></div>
+  <div class="corner-arc" style="left:4%; bottom:4%; border-radius:0 100% 0 0; border-bottom:none; border-left:none;"></div>
+  <div class="corner-arc" style="right:4%; bottom:4%; border-radius:100% 0 0 0; border-bottom:none; border-right:none;"></div>
+
+  <sc-for list="{{players}}" as="p" hint-placeholder-count="11">
+    <div style="position:absolute; left:{{p.x}}%; top:{{p.y}}%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:3px;">
+      <svg width="15%" viewBox="0 0 44 48" style="min-width:30px; filter: drop-shadow(0 3px 4px oklch(0 0 0 / 0.4));">
+        <path d="M14 2 L4 10 L4 18 L10 16 L10 46 L34 46 L34 16 L40 18 L40 10 L30 2 L28 4 Q22 8 16 4 Z" fill="oklch(0.87 0.22 125)" stroke="oklch(0.16 0.01 260)" stroke-width="1.5"></path>
+        <text x="22" y="33" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="17" fill="oklch(0.16 0.01 260)">{{p.number}}</text>
+      </svg>
+      <div style="background: oklch(0 0 0 / 0.6); color: oklch(0.96 0.01 260); font-size:9px; padding:2px 6px; border-radius:4px; white-space:nowrap;">{{p.name}}</div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      players: [
+        { x: 50, y: 92, number: 1, name: 'Mensah' },
+        { x: 15, y: 72, number: 2, name: 'Coker' },
+        { x: 38, y: 76, number: 4, name: 'Osei' },
+        { x: 62, y: 76, number: 5, name: 'Bello' },
+        { x: 85, y: 72, number: 3, name: 'Nwosu' },
+        { x: 30, y: 48, number: 6, name: 'Yusuf' },
+        { x: 50, y: 58, number: 8, name: 'Balogun' },
+        { x: 70, y: 48, number: 10, name: 'Chukwu' },
+        { x: 18, y: 22, number: 7, name: 'Diallo' },
+        { x: 50, y: 16, number: 9, name: 'Adeyemi' },
+        { x: 82, y: 22, number: 11, name: 'Bassey' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": -1060, "w": 390, "h": 900, "title": "Main (Home — Mobile)", "page": "screens" },
+
+    { "file": "DirectionA.dc.html", "x": 0, "y": 0, "w": 390, "h": 900, "page": "directions" },
+    { "file": "DirectionB.dc.html", "x": 510, "y": 0, "w": 390, "h": 900, "page": "directions" },
+    { "file": "DirectionC.dc.html", "x": 1020, "y": 0, "w": 390, "h": 900, "page": "directions" },
+
+    { "file": "Tokens.dc.html", "x": 0, "y": 0, "w": 900, "h": 1040, "page": "design-system" },
+    { "file": "Components.dc.html", "x": 1020, "y": 0, "w": 700, "h": 1040, "page": "design-system" },
+    { "file": "Header.dc.html", "x": 0, "y": 1160, "w": 900, "h": 100, "title": "Header — wide", "page": "design-system" },
+    { "file": "Hero3D.dc.html", "x": 1000, "y": 1160, "w": 360, "h": 360, "page": "design-system" },
+    { "file": "FixtureCard.dc.html", "x": 1460, "y": 1160, "w": 380, "h": 150, "page": "design-system" },
+    { "file": "PlayerCard.dc.html", "x": 1940, "y": 1160, "w": 260, "h": 220, "page": "design-system" },
+    { "file": "PitchView.dc.html", "x": 2300, "y": 1160, "w": 300, "h": 400, "page": "design-system" },
+    { "file": "BenchStrip.dc.html", "x": 2700, "y": 1160, "w": 300, "h": 115, "page": "design-system" },
+
+    { "file": "HomeMobile.dc.html", "x": 0, "y": 0, "w": 390, "h": 900, "page": "screens" },
+    { "file": "HomeTablet.dc.html", "x": 490, "y": 0, "w": 834, "h": 1194, "page": "screens" },
+    { "file": "HomeDesktop.dc.html", "x": 1424, "y": 0, "w": 1440, "h": 900, "page": "screens" },
+
+    { "file": "SquadMobile.dc.html", "x": 0, "y": 1314, "w": 390, "h": 1400, "page": "screens" },
+    { "file": "SquadTablet.dc.html", "x": 490, "y": 1314, "w": 834, "h": 1194, "page": "screens" },
+    { "file": "SquadDesktop.dc.html", "x": 1424, "y": 1314, "w": 1440, "h": 1000, "page": "screens" },
+
+    { "file": "MatchdayMobile.dc.html", "x": 0, "y": 2834, "w": 390, "h": 900, "page": "screens" },
+    { "file": "MatchdayTablet.dc.html", "x": 490, "y": 2834, "w": 834, "h": 1194, "page": "screens" },
+    { "file": "MatchdayDesktop.dc.html", "x": 1424, "y": 2834, "w": 1440, "h": 900, "page": "screens" }
+  ],
+  "annotations": [
+    { "id": "note-directions", "x": 0, "y": -110, "w": 390, "text": "3 explored directions — Floodlight (A) chosen as the identity", "page": "directions" },
+    { "id": "note-a", "x": 0, "y": 930, "w": 390, "text": "A — Floodlight: dark, dramatic, electric lime accent. CHOSEN.", "page": "directions" },
+    { "id": "note-b", "x": 510, "y": 930, "w": 390, "text": "B — Heritage Editorial: warm cream, deep green + brass, italic serif.", "page": "directions" },
+    { "id": "note-c", "x": 1020, "y": 930, "w": 390, "text": "C — Neon Pitch: gradient-mesh dark, cyan/violet glass cards.", "page": "directions" },
+
+    { "id": "note-ds-intro", "x": 0, "y": -80, "w": 900, "text": "Design System — reference tokens and components for the Floodlight identity. Reuse these; don't invent new colors/type.", "page": "design-system" },
+    { "id": "note-hero3d", "x": 1000, "y": -80, "w": 360, "text": "Hero3D here is a CSS-only pseudo-3D stand-in (this preview can't run WebGL). The real site uses an actual interactive glTF model via react-three-fiber, same size/placement/glow.", "page": "design-system" },
+    { "id": "note-pitchview", "x": 2300, "y": -80, "w": 300, "text": "PitchView / BenchStrip — used on the Matchday screens", "page": "design-system" },
+
+    { "id": "note-main", "x": 0, "y": -1170, "w": 390, "text": "Main = flagship Home screen (mobile)", "page": "screens" },
+    { "id": "note-home-row", "x": 0, "y": -40, "w": 390, "text": "Home — mobile / iPad / desktop", "page": "screens" },
+    { "id": "note-squad-row", "x": 0, "y": 1274, "w": 390, "text": "Squad — mobile / iPad / desktop", "page": "screens" },
+    { "id": "note-matchday-row", "x": 0, "y": 2794, "w": 390, "text": "Matchday — mobile / iPad / desktop", "page": "screens" }
+  ],
+  "pages": [
+    { "id": "directions", "name": "Directions" },
+    { "id": "design-system", "name": "Design System" },
+    { "id": "screens", "name": "Screens" }
+  ],
+  "launch": { "view": "canvas", "page": "screens" }
+}
