@@ -14,6 +14,7 @@ const NAV_ITEMS = [
   { href: "/admin/players", label: "Players" },
   { href: "/admin/fixtures", label: "Fixtures" },
   { href: "/admin/trainings", label: "Trainings" },
+  { href: "/admin/news", label: "News" },
   { href: "/admin/admins", label: "Admins" },
 ];
 

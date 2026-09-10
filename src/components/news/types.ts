@@ -1,8 +1,10 @@
+export type NewsKind = "CLUB_NEWS" | "MATCH_REPORT";
+
 export type NewsItem = {
   slug: string;
   day: string;
   date: string;
-  kind: "CLUB NEWS" | "MATCH REPORT";
+  kind: NewsKind;
   title: string;
   excerpt: string;
 };
@@ -10,13 +12,20 @@ export type NewsItem = {
 export type ArticleBody = {
   slug: string;
   title: string;
+  kind: NewsKind;
   byline: string;
   date: string;
   readTime: string;
-  competition: string;
-  us: number;
-  them: number;
+  excerpt: string;
   paragraphs: string[];
-  startingXi: string;
-  subs: string;
+  competition: string | null;
+  us: number | null;
+  them: number | null;
+  startingXi: string | null;
+  subs: string | null;
+};
+
+export const KIND_LABEL: Record<NewsKind, string> = {
+  CLUB_NEWS: "CLUB NEWS",
+  MATCH_REPORT: "MATCH REPORT",
 };

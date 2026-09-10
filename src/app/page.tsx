@@ -10,18 +10,25 @@ import { NextMatchCard } from "@/components/home/NextMatchCard";
 import { PositionTeaser } from "@/components/home/PositionTeaser";
 import { SquadPitchPreview } from "@/components/home/SquadPitchPreview";
 import { PLACEHOLDER_STANDINGS } from "@/components/home/sample-data";
-import { SAMPLE_NEWS_FEED } from "@/components/news/sample-data";
 import { listPlayers } from "@/actions/players";
 import { getLastResult, getUpcomingForHome } from "@/actions/fixtures";
+import { listPublishedNews } from "@/actions/news";
+import { mapDbNewsItem } from "@/components/news/map-db-article";
 
-// Fetches live squad/fixture data — don't statically prerender at build
-// time (the database isn't reachable from the build step on Vercel).
+// Fetches live squad/fixture/news data — don't statically prerender at
+// build time (the database isn't reachable from the build step on Vercel).
 export const dynamic = "force-dynamic";
 
 const HERO_CUT = "[clip-path:polygon(0_0,100%_0,100%_100%,64px_100%,0_calc(100%-64px))]";
 
 export default async function HomePage() {
-  const [players, nextMatch, lastResult] = await Promise.all([listPlayers(), getUpcomingForHome(), getLastResult()]);
+  const [players, nextMatch, lastResult, news] = await Promise.all([
+    listPlayers(),
+    getUpcomingForHome(),
+    getLastResult(),
+    listPublishedNews(),
+  ]);
+  const latestNews = news.slice(0, 3).map(mapDbNewsItem);
 
   return (
     <>
@@ -46,8 +53,8 @@ export default async function HomePage() {
                 </span>
               </h1>
               <p className="text-pretty text-lg leading-relaxed text-fg sm:text-xl">
-                Proud, loud, and built on a Saturday-terrace heart. Follow OHC FC through every matchday, every
-                lineup, every result.
+                Built on grit, grown on the terraces, carried by everyone who shows up. Follow OHC FC through every
+                matchday, every lineup, every result.
               </p>
             </div>
 
@@ -97,11 +104,15 @@ export default async function HomePage() {
                 All news
               </Link>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              {SAMPLE_NEWS_FEED.map((item, index) => (
-                <HomeNewsCard key={`${item.slug}-${item.date}`} item={item} delayMs={index * 70} />
-              ))}
-            </div>
+            {latestNews.length > 0 ? (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                {latestNews.map((item, index) => (
+                  <HomeNewsCard key={item.slug} item={item} delayMs={index * 70} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-sm text-muted">No news yet.</p>
+            )}
           </div>
         </section>
       </main>

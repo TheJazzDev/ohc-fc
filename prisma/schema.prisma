@@ -50,6 +50,11 @@ enum AttendanceStatus {
   ABSENT
 }
 
+enum NewsKind {
+  CLUB_NEWS
+  MATCH_REPORT
+}
+
 model AdminUser {
   id           String   @id @default(cuid())
   name         String
@@ -130,4 +135,23 @@ model TrainingAttendance {
   markedAt  DateTime?
 
   @@unique([sessionId, playerId])
+}
+
+model NewsArticle {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  kind        NewsKind @default(CLUB_NEWS)
+  excerpt     String
+  body        String
+  byline      String?
+  competition String?
+  ourScore    Int?
+  theirScore  Int?
+  startingXi  String?
+  subs        String?
+  published   Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

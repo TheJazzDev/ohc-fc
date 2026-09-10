@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { NewsItem } from "./types";
+import { KIND_LABEL, type NewsItem } from "./types";
 
 export function NewsFeedCard({ item, delayMs = 0 }: { item: NewsItem; delayMs?: number }) {
   return (
@@ -15,7 +15,7 @@ export function NewsFeedCard({ item, delayMs = 0 }: { item: NewsItem; delayMs?: 
         <span className="skew-x-[-7deg] font-heading text-3xl leading-[0.9] font-bold tabular-nums tracking-tight text-fg/85 sm:text-4xl">
           {item.day}
         </span>
-        <span className="font-heading text-[11px] font-medium tracking-[0.12em] text-fg/70">{item.kind}</span>
+        <span className="font-heading text-[11px] font-medium tracking-[0.12em] text-fg/70">{KIND_LABEL[item.kind]}</span>
       </div>
       <div className="flex flex-col gap-2 p-5">
         <div className="text-pretty font-heading text-lg leading-tight font-semibold sm:text-xl">{item.title}</div>

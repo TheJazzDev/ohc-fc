@@ -3,9 +3,17 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Grain } from "@/components/atmosphere/Grain";
 import { LightBeams } from "@/components/atmosphere/LightBeams";
 import { NewsSection } from "@/components/news/NewsSection";
-import { SAMPLE_ARTICLE, SAMPLE_NEWS_FEED } from "@/components/news/sample-data";
+import { listPublishedNews } from "@/actions/news";
+import { mapDbArticleBody, mapDbNewsItem } from "@/components/news/map-db-article";
 
-export default function NewsPage() {
+// Fetches live news data — don't statically prerender at build time
+// (the database isn't reachable from the build step on Vercel).
+export const dynamic = "force-dynamic";
+
+export default async function NewsPage() {
+  const articles = await listPublishedNews();
+  const [latest, ...rest] = articles;
+
   return (
     <>
       <SiteHeader active="News" />
@@ -13,7 +21,11 @@ export default function NewsPage() {
         <LightBeams />
         <Grain opacity={0.4} />
         <main className="relative mx-auto max-w-app px-4 py-8 sm:px-8 sm:py-12 lg:py-16">
-          <NewsSection feed={SAMPLE_NEWS_FEED} featured={SAMPLE_ARTICLE} />
+          {latest ? (
+            <NewsSection feed={rest.map(mapDbNewsItem)} featured={mapDbArticleBody(latest)} />
+          ) : (
+            <p className="text-sm text-muted">No news yet — check back soon.</p>
+          )}
         </main>
       </div>
       <SiteFooter />
