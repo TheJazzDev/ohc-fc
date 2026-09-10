@@ -7,7 +7,8 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "seed:admin": "bun prisma/seed-admin.ts"
+    "seed:admin": "bun prisma/seed-admin.ts",
+    "seed:dev-data": "bun prisma/seed-dev-data.ts"
   },
   "dependencies": {
     "@prisma/client": "^7.10.0",
