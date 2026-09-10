@@ -8,6 +8,10 @@ import { MatchHeader } from "@/components/matchday/MatchHeader";
 import { PitchStage } from "@/components/matchday/PitchStage";
 import { getNextFixture } from "@/actions/fixtures";
 
+// Fetches live fixture/lineup data — don't statically prerender at build
+// time (the database isn't reachable from the build step on Vercel).
+export const dynamic = "force-dynamic";
+
 export default async function MatchdayPage() {
   const next = await getNextFixture();
 

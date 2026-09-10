@@ -14,6 +14,10 @@ import { SAMPLE_NEWS_FEED } from "@/components/news/sample-data";
 import { listPlayers } from "@/actions/players";
 import { getLastResult, getUpcomingForHome } from "@/actions/fixtures";
 
+// Fetches live squad/fixture data — don't statically prerender at build
+// time (the database isn't reachable from the build step on Vercel).
+export const dynamic = "force-dynamic";
+
 const HERO_CUT = "[clip-path:polygon(0_0,100%_0,100%_100%,64px_100%,0_calc(100%-64px))]";
 
 export default async function HomePage() {

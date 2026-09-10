@@ -6,6 +6,10 @@ import { SquadSection } from "@/components/squad/SquadSection";
 import { mapDbPlayer } from "@/components/squad/map-db-player";
 import { listPlayers } from "@/actions/players";
 
+// Fetches live squad data — don't statically prerender at build time
+// (the database isn't reachable from the build step on Vercel).
+export const dynamic = "force-dynamic";
+
 export default async function SquadPage() {
   const players = await listPlayers();
   const roster = players.map(mapDbPlayer);

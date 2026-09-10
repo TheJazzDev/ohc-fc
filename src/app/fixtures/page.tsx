@@ -6,6 +6,10 @@ import { FixturesSection } from "@/components/fixtures/FixturesSection";
 import { PLACEHOLDER_TABLE } from "@/components/fixtures/sample-data";
 import { listResults, listUpcomingFixtures } from "@/actions/fixtures";
 
+// Fetches live fixture data — don't statically prerender at build time
+// (the database isn't reachable from the build step on Vercel).
+export const dynamic = "force-dynamic";
+
 export default async function FixturesPage() {
   const [upcoming, results] = await Promise.all([listUpcomingFixtures(), listResults()]);
 
