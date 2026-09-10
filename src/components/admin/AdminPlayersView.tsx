@@ -75,7 +75,7 @@ export function AdminPlayersView({ players }: { players: AdminPlayerRow[] }) {
         ))}
       </div>
 
-      <div className="overflow-hidden rounded-md border border-fg/10 bg-surface-2">
+      <div className="overflow-hidden rounded-md border border-fg/10 bg-surface-2 shadow-resting">
         <div className="hidden grid-cols-[72px_minmax(0,1.6fr)_120px_120px_minmax(0,2fr)_150px] items-center gap-4 border-b border-fg/10 px-5 py-2.5 lg:grid">
           <span className={ADMIN_TABLE_HEAD_CELL}>No.</span>
           <span className={ADMIN_TABLE_HEAD_CELL}>Name</span>

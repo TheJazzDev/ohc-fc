@@ -2,6 +2,7 @@ import Link from "next/link";
 import { logoutAction } from "@/actions/auth";
 import { LogoMark } from "@/components/layout/LogoMark";
 import { AdminNavLink } from "@/components/admin/AdminNavLink";
+import { Grain } from "@/components/atmosphere/Grain";
 
 // Every screen under here is authenticated, per-user, always-fresh admin
 // data — never statically prerender it (also sidesteps the database not
@@ -49,7 +50,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
         ))}
       </nav>
-      <main>{children}</main>
+      <div className="relative overflow-hidden bg-[radial-gradient(120%_90%_at_25%_0%,oklch(0.205_0.016_260)_0%,oklch(0.16_0.01_260)_58%,oklch(0.13_0.01_260)_100%)]">
+        <Grain opacity={0.2} />
+        <main className="relative">{children}</main>
+      </div>
     </div>
   );
 }

@@ -25,7 +25,7 @@ export function AdminAdminsView({ admins }: { admins: AdminAdminRow[] }) {
         </Link>
       </div>
 
-      <div className="overflow-hidden rounded-md border border-fg/10 bg-surface-2">
+      <div className="overflow-hidden rounded-md border border-fg/10 bg-surface-2 shadow-resting">
         <div className="hidden grid-cols-[minmax(0,1.4fr)_minmax(0,1.6fr)_140px_100px] items-center gap-4 border-b border-fg/10 px-5 py-2.5 lg:grid">
           <span className={ADMIN_TABLE_HEAD_CELL}>Name</span>
           <span className={ADMIN_TABLE_HEAD_CELL}>Email</span>

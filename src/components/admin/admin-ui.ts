@@ -1,4 +1,6 @@
-export const ADMIN_CARD = "rounded-md border border-fg/10 bg-surface-2 p-5 sm:p-6";
+export const ADMIN_CARD = "rounded-md border border-fg/10 bg-surface-2 p-5 shadow-resting sm:p-6";
+
+export const ADMIN_TABLE = "overflow-hidden rounded-md border border-fg/10 bg-surface-2 shadow-resting";
 
 export const ADMIN_INPUT =
   "h-10 rounded-md border border-fg/14 bg-surface px-3 text-[15px] text-fg outline-none focus:border-accent focus:ring-2 focus:ring-accent/30 sm:text-base";

@@ -102,7 +102,7 @@ export function AdminTrainingDetail({
       {attError && <p className="text-sm text-red-400">{attError}</p>}
 
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
-        <form id={attFormId} action={attFormAction} className="overflow-hidden rounded-md border border-fg/10 bg-surface-2">
+        <form id={attFormId} action={attFormAction} className="overflow-hidden rounded-md border border-fg/10 bg-surface-2 shadow-resting">
           {roster.map((player) => (
             <input key={player.id} type="hidden" name={`status-${player.id}`} value={attendance[player.id]} />
           ))}

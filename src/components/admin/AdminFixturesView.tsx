@@ -59,7 +59,7 @@ export function AdminFixturesView({ fixtures, playedCount, upcomingCount }: { fi
         </div>
       </div>
 
-      <div className="overflow-hidden rounded-md border border-fg/10 bg-surface-2">
+      <div className="overflow-hidden rounded-md border border-fg/10 bg-surface-2 shadow-resting">
         <div className="hidden grid-cols-[minmax(0,1.8fr)_minmax(0,1.2fr)_190px_90px_110px_220px] items-center gap-4 border-b border-fg/10 px-5 py-2.5 lg:grid">
           <span className={ADMIN_TABLE_HEAD_CELL}>Opponent</span>
           <span className={ADMIN_TABLE_HEAD_CELL}>Competition</span>
