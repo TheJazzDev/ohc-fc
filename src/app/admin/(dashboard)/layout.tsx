@@ -3,6 +3,7 @@ import { logoutAction } from "@/actions/auth";
 import { LogoMark } from "@/components/layout/LogoMark";
 import { AdminNavLink } from "@/components/admin/AdminNavLink";
 import { Grain } from "@/components/atmosphere/Grain";
+import { ADMIN_ROW_ACTION } from "@/components/admin/admin-ui";
 
 // Every screen under here is authenticated, per-user, always-fresh admin
 // data — never statically prerender it (also sidesteps the database not
@@ -31,14 +32,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <AdminNavLink key={item.href} href={item.href} label={item.label} />
           ))}
         </nav>
-        <form action={logoutAction}>
-          <button
-            type="submit"
-            className="cursor-pointer font-heading text-xs font-medium tracking-[0.1em] text-muted uppercase hover:text-fg"
-          >
-            Sign out
-          </button>
-        </form>
+        <div className="flex items-center gap-4">
+          <Link href="/" className={ADMIN_ROW_ACTION}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <path d="M15 3h6v6" />
+              <path d="M10 14L21 3" />
+            </svg>
+            View site
+          </Link>
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="cursor-pointer font-heading text-xs font-medium tracking-[0.1em] text-muted uppercase hover:text-fg"
+            >
+              Sign out
+            </button>
+          </form>
+        </div>
       </header>
       <nav className="flex items-center gap-1 overflow-x-auto border-b border-fg/10 bg-surface px-4 py-2 md:hidden">
         {NAV_ITEMS.map((item) => (
