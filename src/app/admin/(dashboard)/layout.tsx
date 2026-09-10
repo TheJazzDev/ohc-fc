@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { href: "/admin/players", label: "Players" },
   { href: "/admin/fixtures", label: "Fixtures" },
   { href: "/admin/trainings", label: "Trainings" },
+  { href: "/admin/showcase", label: "Showcase" },
   { href: "/admin/news", label: "News" },
   { href: "/admin/admins", label: "Admins" },
 ];
@@ -22,7 +23,7 @@ const NAV_ITEMS = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-dvh bg-surface">
-      <header className="flex h-14 items-center justify-between gap-6 border-b border-fg/10 bg-surface px-4 sm:px-10">
+      <header className="sticky top-0 z-40 flex h-14 items-center justify-between gap-6 border-b border-fg/10 bg-surface px-4 sm:px-10">
         <div className="flex items-center gap-2.5">
           <LogoMark />
           <span className="font-heading text-sm font-bold tracking-wide uppercase">OHC FC · Admin</span>

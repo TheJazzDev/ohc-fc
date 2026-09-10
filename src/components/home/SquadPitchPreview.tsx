@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Jersey } from "@/components/shared/Jersey";
 import { Pitch } from "@/components/shared/Pitch";
 import type { Position } from "@/components/squad/types";
+import { formationSlots } from "@/components/matchday/formations";
 import { SQUAD_PITCH_SLOTS, type PitchSlotPosition } from "./squad-pitch-template";
 
 const ZONE_BY_POSITION: Record<Position, PitchSlotPosition> = {
@@ -15,9 +16,10 @@ const ZONE_BY_POSITION: Record<Position, PitchSlotPosition> = {
   ST: "FW",
 };
 
-type RosterPlayer = { number: number; name: string; position: Position };
+type RosterPlayer = { id: string; number: number; name: string; position: Position };
+type PitchSlotView = { left: number; top: number; player: RosterPlayer | null };
 
-function assignSlots(players: RosterPlayer[]) {
+function assignSlots(players: RosterPlayer[]): PitchSlotView[] {
   const byPosition: Record<PitchSlotPosition, RosterPlayer[]> = { GK: [], DF: [], MF: [], FW: [] };
   for (const player of players) {
     byPosition[ZONE_BY_POSITION[player.position]].push(player);
@@ -27,13 +29,27 @@ function assignSlots(players: RosterPlayer[]) {
   }
 
   return SQUAD_PITCH_SLOTS.map((slot) => ({
-    ...slot,
+    left: slot.left,
+    top: slot.top,
     player: byPosition[slot.position].shift() ?? null,
   }));
 }
 
-export function SquadPitchPreview({ players }: { players: RosterPlayer[] }) {
-  const slots = assignSlots(players);
+// Admin-curated shape for the "Squad showcase" — same slots the real
+// matchday pitch uses, filled with whoever the admin placed in each one.
+function showcaseSlots(formation: string, starterIds: (string | undefined)[], players: RosterPlayer[]): PitchSlotView[] {
+  const byId = new Map(players.map((player) => [player.id, player]));
+  return formationSlots(formation).map((slot, index) => ({
+    left: slot.x,
+    top: 100 - slot.y,
+    player: byId.get(starterIds[index] ?? "") ?? null,
+  }));
+}
+
+export type SquadShowcaseData = { formation: string; starterIds: (string | undefined)[] } | null;
+
+export function SquadPitchPreview({ players, showcase }: { players: RosterPlayer[]; showcase: SquadShowcaseData }) {
+  const slots = showcase ? showcaseSlots(showcase.formation, showcase.starterIds, players) : assignSlots(players);
   const filledCount = slots.filter((slot) => slot.player).length;
   const total = slots.length;
   const complete = filledCount === total;

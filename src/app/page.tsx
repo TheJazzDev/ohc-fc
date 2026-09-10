@@ -12,6 +12,7 @@ import { SquadPitchPreview } from "@/components/home/SquadPitchPreview";
 import { PLACEHOLDER_STANDINGS } from "@/components/home/sample-data";
 import { listPlayers } from "@/actions/players";
 import { getLastResult, getUpcomingForHome } from "@/actions/fixtures";
+import { getSquadShowcaseForHome } from "@/actions/squad-showcase";
 import { listPublishedNews } from "@/actions/news";
 import { mapDbNewsItem } from "@/components/news/map-db-article";
 
@@ -22,11 +23,12 @@ export const dynamic = "force-dynamic";
 const HERO_CUT = "[clip-path:polygon(0_0,100%_0,100%_100%,64px_100%,0_calc(100%-64px))]";
 
 export default async function HomePage() {
-  const [players, nextMatch, lastResult, news] = await Promise.all([
+  const [players, nextMatch, lastResult, news, showcase] = await Promise.all([
     listPlayers(),
     getUpcomingForHome(),
     getLastResult(),
     listPublishedNews(),
+    getSquadShowcaseForHome(),
   ]);
   const latestNews = news.slice(0, 3).map(mapDbNewsItem);
 
@@ -64,7 +66,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <SquadPitchPreview players={players} />
+        <SquadPitchPreview players={players} showcase={showcase} />
 
         <section className="mx-auto flex max-w-app flex-col gap-4 px-4 py-8 sm:flex-row sm:px-8 sm:py-10">
           <div className="sm:flex-1">

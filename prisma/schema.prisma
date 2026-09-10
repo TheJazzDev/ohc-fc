@@ -64,18 +64,19 @@ model AdminUser {
 }
 
 model Player {
-  id         String               @id @default(cuid())
-  name       String
-  number     Int                  @unique
-  position   Position
-  status     PlayerStatus         @default(FIRST_TEAM)
-  active     Boolean              @default(true)
-  photoUrl   String?
-  bio        String?
-  slots      LineupSlot[]
-  attendance TrainingAttendance[]
-  createdAt  DateTime             @default(now())
-  updatedAt  DateTime             @updatedAt
+  id            String               @id @default(cuid())
+  name          String
+  number        Int                  @unique
+  position      Position
+  status        PlayerStatus         @default(FIRST_TEAM)
+  active        Boolean              @default(true)
+  photoUrl      String?
+  bio           String?
+  slots         LineupSlot[]
+  showcaseSlots SquadShowcaseSlot[]
+  attendance    TrainingAttendance[]
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
 }
 
 model Fixture {
@@ -154,4 +155,29 @@ model NewsArticle {
   publishedAt DateTime @default(now())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// Singleton: the admin-curated squad graphic shown on the homepage while the
+// club is still building the squad, ahead of the real season starting in
+// March. Deliberately separate from Fixture/LineupSlot — it isn't tied to an
+// opponent or a real match.
+model SquadShowcase {
+  id        String              @id @default(cuid())
+  formation String              @default("4-3-3")
+  live      Boolean             @default(false)
+  slots     SquadShowcaseSlot[]
+  updatedAt DateTime            @updatedAt
+}
+
+model SquadShowcaseSlot {
+  id         String        @id @default(cuid())
+  showcaseId String
+  showcase   SquadShowcase @relation(fields: [showcaseId], references: [id], onDelete: Cascade)
+  playerId   String
+  player     Player        @relation(fields: [playerId], references: [id])
+  slotIndex  Int
+  label      String
+
+  @@unique([showcaseId, playerId])
+  @@unique([showcaseId, slotIndex])
 }
