@@ -55,3 +55,36 @@ export function isFormation(value: string): value is Formation {
 export function formationSlots(formation: string): FormationSlot[] {
   return FORMATIONS[isFormation(formation) ? formation : "4-3-3"];
 }
+
+// Same slots, mapped onto a landscape pitch (goal-to-goal runs left-to-right
+// instead of top-to-bottom) — swap the axes rather than re-deriving them.
+export function formationSlotsLandscape(formation: string): (FormationSlot & { left: number; top: number })[] {
+  return formationSlots(formation).map((slot) => ({ ...slot, left: slot.y, top: slot.x }));
+}
+
+export type LineGroup = { label: string; from: number; to: number };
+
+const LINE_GROUPS: Record<Formation, LineGroup[]> = {
+  "4-3-3": [
+    { label: "Goalkeeper", from: 0, to: 1 },
+    { label: "Back four", from: 1, to: 5 },
+    { label: "Midfield three", from: 5, to: 8 },
+    { label: "Front three", from: 8, to: 11 },
+  ],
+  "4-4-2": [
+    { label: "Goalkeeper", from: 0, to: 1 },
+    { label: "Back four", from: 1, to: 5 },
+    { label: "Midfield four", from: 5, to: 9 },
+    { label: "Front two", from: 9, to: 11 },
+  ],
+  "3-5-2": [
+    { label: "Goalkeeper", from: 0, to: 1 },
+    { label: "Back three", from: 1, to: 4 },
+    { label: "Midfield five", from: 4, to: 9 },
+    { label: "Front two", from: 9, to: 11 },
+  ],
+};
+
+export function lineGroups(formation: string): LineGroup[] {
+  return LINE_GROUPS[isFormation(formation) ? formation : "4-3-3"];
+}

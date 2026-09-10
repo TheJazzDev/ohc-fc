@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { getFixture } from "@/actions/fixtures";
 import { listPlayers } from "@/actions/players";
-import { LineupPicker, type InitialLineup } from "@/components/admin/LineupPicker";
+import { saveLineup } from "@/actions/lineups";
+import { AdminLineupBuilder, type LineupInitial } from "@/components/admin/AdminLineupBuilder";
+import { formatLongDate, formatTime } from "@/lib/format-kickoff";
 
 export default async function FixtureLineupPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -19,21 +21,23 @@ export default async function FixtureLineupPage({ params }: { params: Promise<{ 
     .sort((a, b) => a.slotIndex - b.slotIndex)
     .map((slot) => slot.playerId);
 
-  const initial: InitialLineup = {
+  const initial: LineupInitial = {
     formation: fixture.formation,
     announced: fixture.lineupAnnounced,
     starters,
     bench,
   };
 
+  const ground = fixture.venue === "HOME" ? fixture.ground || "Pearson Park" : fixture.ground || "Away";
+  const matchMeta = `${formatLongDate(fixture.kickoff)} · ${formatTime(fixture.kickoff)} · ${fixture.competition}${
+    fixture.round ? `, ${fixture.round.toLowerCase()}` : ""
+  } · ${ground}`;
+
+  const boundSave = saveLineup.bind(null, id);
+
   return (
-    <div className="mx-auto max-w-md px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="mb-1 font-heading text-xl font-bold uppercase sm:text-2xl">Lineup</h1>
-      <p className="mb-6 text-sm text-muted">
-        vs {fixture.opponent} · {fixture.competition}
-      </p>
-      <LineupPicker
-        fixtureId={id}
+    <div className="px-4 py-8 sm:px-8 sm:py-10 lg:mx-auto lg:max-w-app lg:px-10 lg:py-12">
+      <AdminLineupBuilder
         players={players.map((player) => ({
           id: player.id,
           number: player.number,
@@ -41,6 +45,9 @@ export default async function FixtureLineupPage({ params }: { params: Promise<{ 
           position: player.position,
         }))}
         initial={initial}
+        matchTitle={`vs ${fixture.opponent}`}
+        matchMeta={matchMeta}
+        action={boundSave}
       />
     </div>
   );

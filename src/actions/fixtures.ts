@@ -105,7 +105,7 @@ export async function createFixture(_prevState: string | null, formData: FormDat
   });
   if (duplicate) return "A fixture against this opponent at this kickoff already exists";
 
-  await prisma.fixture.create({
+  const fixture = await prisma.fixture.create({
     data: {
       opponent: parsed.data.opponent,
       competition: parsed.data.competition,
@@ -117,7 +117,7 @@ export async function createFixture(_prevState: string | null, formData: FormDat
   });
 
   revalidateFixturePaths();
-  redirect("/admin/fixtures");
+  redirect(formData.get("intent") === "lineup" ? `/admin/fixtures/${fixture.id}/lineup` : "/admin/fixtures");
 }
 
 export async function updateFixture(id: string, _prevState: string | null, formData: FormData) {
@@ -147,7 +147,7 @@ export async function updateFixture(id: string, _prevState: string | null, formD
   });
 
   revalidateFixturePaths();
-  redirect("/admin/fixtures");
+  redirect(formData.get("intent") === "lineup" ? `/admin/fixtures/${id}/lineup` : "/admin/fixtures");
 }
 
 export async function saveResult(id: string, _prevState: string | null, formData: FormData) {

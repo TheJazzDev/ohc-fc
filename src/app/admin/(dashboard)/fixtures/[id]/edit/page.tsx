@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getFixture, saveResult, updateFixture } from "@/actions/fixtures";
-import { FixtureForm } from "@/components/admin/FixtureForm";
+import { AdminFixtureForm } from "@/components/admin/AdminFixtureForm";
 import { ResultForm } from "@/components/admin/ResultForm";
 import { DeleteFixtureButton } from "@/components/admin/DeleteFixtureButton";
+import { ADMIN_CARD, ADMIN_LABEL } from "@/components/admin/admin-ui";
 
 export default async function EditFixturePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -14,14 +15,15 @@ export default async function EditFixturePage({ params }: { params: Promise<{ id
   const boundResult = saveResult.bind(null, id);
 
   return (
-    <div className="mx-auto max-w-md px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="mb-6 font-heading text-xl font-bold uppercase sm:text-2xl">Edit fixture</h1>
-      <FixtureForm action={boundUpdate} initialValues={fixture} />
+    <div className="flex flex-col gap-6 px-4 py-8 sm:px-8 sm:py-10 lg:mx-auto lg:max-w-app lg:px-10 lg:py-12">
+      <AdminFixtureForm action={boundUpdate} initialValues={fixture} />
 
-      <h2 className="mt-10 mb-4 font-heading text-lg font-bold uppercase">Result</h2>
-      <ResultForm action={boundResult} initialValues={fixture} />
+      <div className={`${ADMIN_CARD} mx-auto w-full max-w-md flex flex-col gap-5 lg:mx-0`}>
+        <span className={ADMIN_LABEL}>Result</span>
+        <ResultForm action={boundResult} initialValues={fixture} />
+      </div>
 
-      <div className="mt-10 flex items-center justify-between border-t border-fg/10 pt-6">
+      <div className="mx-auto flex w-full max-w-md items-center justify-between border-t border-fg/10 pt-6 lg:mx-0">
         <Link href={`/admin/fixtures/${id}/lineup`} className="text-sm text-muted no-underline hover:text-accent">
           Manage lineup
         </Link>

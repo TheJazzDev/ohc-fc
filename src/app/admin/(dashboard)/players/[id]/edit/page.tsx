@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { updatePlayer } from "@/actions/players";
-import { PlayerForm } from "@/components/admin/PlayerForm";
+import { AdminPlayerForm } from "@/components/admin/AdminPlayerForm";
 
 export default async function EditPlayerPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -11,9 +11,8 @@ export default async function EditPlayerPage({ params }: { params: Promise<{ id:
   const boundAction = updatePlayer.bind(null, id);
 
   return (
-    <div className="mx-auto max-w-md px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="mb-6 font-heading text-xl font-bold uppercase sm:text-2xl">Edit player</h1>
-      <PlayerForm action={boundAction} initialValues={player} />
+    <div className="px-4 py-8 sm:px-8 sm:py-10 lg:mx-auto lg:max-w-app lg:px-10 lg:py-12">
+      <AdminPlayerForm action={boundAction} initialValues={player} />
     </div>
   );
 }
