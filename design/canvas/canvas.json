@@ -21,11 +21,13 @@
 
     { "file": "SquadMobile.dc.html", "x": 0, "y": 1314, "w": 390, "h": 1400, "page": "screens" },
     { "file": "SquadTablet.dc.html", "x": 490, "y": 1314, "w": 834, "h": 1194, "page": "screens" },
-    { "file": "SquadDesktop.dc.html", "x": 1424, "y": 1314, "w": 1440, "h": 1000, "page": "screens" },
+    { "file": "SquadDesktop.dc.html", "x": 1424, "y": 1314, "w": 1440, "h": 1000, "title": "Squad Desktop — Current", "page": "screens" },
+    { "file": "SquadDesktopRevised.dc.html", "x": 1424, "y": 2394, "w": 1440, "h": 1000, "title": "Squad Desktop — Recommended", "page": "screens" },
+    { "file": "PlayerCardRevised.dc.html", "x": 2964, "y": 2394, "w": 260, "h": 300, "title": "Player card — Recommended (tweakable)", "page": "screens" },
 
-    { "file": "MatchdayMobile.dc.html", "x": 0, "y": 2834, "w": 390, "h": 900, "page": "screens" },
-    { "file": "MatchdayTablet.dc.html", "x": 490, "y": 2834, "w": 834, "h": 1194, "page": "screens" },
-    { "file": "MatchdayDesktop.dc.html", "x": 1424, "y": 2834, "w": 1440, "h": 900, "page": "screens" }
+    { "file": "MatchdayMobile.dc.html", "x": 0, "y": 3514, "w": 390, "h": 900, "page": "screens" },
+    { "file": "MatchdayTablet.dc.html", "x": 490, "y": 3514, "w": 834, "h": 1194, "page": "screens" },
+    { "file": "MatchdayDesktop.dc.html", "x": 1424, "y": 3514, "w": 1440, "h": 900, "page": "screens" }
   ],
   "annotations": [
     { "id": "note-directions", "x": 0, "y": -110, "w": 390, "text": "3 explored directions — Floodlight (A) chosen as the identity", "page": "directions" },
@@ -40,7 +42,9 @@
     { "id": "note-main", "x": 0, "y": -1170, "w": 390, "text": "Main = flagship Home screen (mobile)", "page": "screens" },
     { "id": "note-home-row", "x": 0, "y": -40, "w": 390, "text": "Home — mobile / iPad / desktop", "page": "screens" },
     { "id": "note-squad-row", "x": 0, "y": 1274, "w": 390, "text": "Squad — mobile / iPad / desktop", "page": "screens" },
-    { "id": "note-matchday-row", "x": 0, "y": 2794, "w": 390, "text": "Matchday — mobile / iPad / desktop", "page": "screens" }
+    { "id": "note-squad-current", "x": 1424, "y": 1274, "w": 500, "text": "Current: 1152px container, 300px panel, 4-col grid ≈188px cards, text-xs (12px) number/position, no flip hint, 9-position filter scrolls off panel.", "page": "screens" },
+    { "id": "note-squad-revised", "x": 1424, "y": 2354, "w": 500, "text": "Recommended: 1320px container, 320px panel, 4-col grid ≈220px cards, larger number/position label, subtle flip-hint icon, filter pills wrap instead of scroll. Card on the right has live tweaks (height, label size, hint on/off) — play with it.", "page": "screens" },
+    { "id": "note-matchday-row", "x": 0, "y": 3474, "w": 390, "text": "Matchday — mobile / iPad / desktop", "page": "screens" }
   ],
   "pages": [
     { "id": "directions", "name": "Directions" },

@@ -11,31 +11,32 @@
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; }
+    .pill { flex: none; height: 40px; display: flex; align-items: center; border-radius: 9999px; padding: 0 16px; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260); }
   </style>
 </helmet>
 <div style="width:1440px; height:1000px; background: oklch(0.16 0.01 260); font-family:'Work Sans', system-ui, sans-serif; color: oklch(0.96 0.01 260); overflow:hidden; display:flex; flex-direction:column;">
 
   <dc-import name="Header" variant="wide" hint-size="1440px,72px"></dc-import>
 
-  <div style="margin:0 auto; width:100%; max-width:1152px; padding:64px 32px; display:flex; gap:40px; align-items:flex-start;">
+  <div style="margin:0 auto; width:100%; max-width:1320px; padding:64px 24px; display:flex; gap:48px; align-items:flex-start;">
 
-    <div style="flex:0 0 300px; display:flex; flex-direction:column; gap:20px; border-radius:16px; border:1px solid oklch(0.96 0.01 260 / 0.1); background: oklch(0.20 0.015 260 / 0.7); padding:24px;">
+    <div style="flex:0 0 320px; display:flex; flex-direction:column; gap:20px; border-radius:16px; border:1px solid oklch(0.96 0.01 260 / 0.1); background: oklch(0.20 0.015 260 / 0.7); padding:26px;">
       <div style="display:flex; flex-direction:column; gap:6px;">
         <span style="font-family:'Oswald',sans-serif; font-weight:500; font-size:11px; letter-spacing:0.14em; color: oklch(0.65 0.02 260); text-transform:uppercase;">2026/27 · First Team</span>
         <h1 style="margin:0; font-family:'Oswald',sans-serif; font-weight:700; font-size:60px; line-height:0.95; letter-spacing:-0.01em; text-transform:uppercase; background: linear-gradient(100deg, oklch(0.87 0.22 125) 0%, oklch(0.78 0.15 75) 100%); -webkit-background-clip:text; background-clip:text; color:transparent;">Squad</h1>
       </div>
       <p style="margin:0; font-size:14px; line-height:1.6; color: oklch(0.65 0.02 260);">11 players confirmed for 2026/27. Eleven who start, the rest who wait, one badge.</p>
 
-      <div style="display:flex; gap:8px; overflow-x:auto; white-space:nowrap;">
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; background: oklch(0.96 0.01 260); color: oklch(0.16 0.01 260);">All</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">GK</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">CB</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">FB</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">DM</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">CM</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">AM</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">W</div>
-        <div style="flex:none; height:40px; display:flex; align-items:center; border-radius:9999px; padding:0 18px; font-family:'Oswald',sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em; text-transform:uppercase; border:1px solid oklch(0.96 0.01 260 / 0.2); color: oklch(0.65 0.02 260);">ST</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <div class="pill" style="border:none; background: oklch(0.96 0.01 260); color: oklch(0.16 0.01 260);">All</div>
+        <div class="pill">GK</div>
+        <div class="pill">CB</div>
+        <div class="pill">FB</div>
+        <div class="pill">DM</div>
+        <div class="pill">CM</div>
+        <div class="pill">AM</div>
+        <div class="pill">W</div>
+        <div class="pill">ST</div>
       </div>
 
       <div style="display:flex; align-items:center; gap:10px; height:44px; border-radius:8px; border:1px solid oklch(0.96 0.01 260 / 0.12); background: oklch(0.16 0.01 260); padding:0 14px; color: oklch(0.65 0.02 260);">
@@ -44,9 +45,9 @@
       </div>
     </div>
 
-    <div style="flex:1 1 auto; display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:20px;">
+    <div style="flex:1 1 auto; display:grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap:24px;">
       <sc-for list="{{players}}" as="p" hint-placeholder-count="11">
-        <dc-import name="PlayerCard" player-name="{{p.name}}" number="{{p.number}}" position="{{p.position}}" initials="{{p.initials}}" bio="{{p.bio}}" hint-size="188px,232px"></dc-import>
+        <dc-import name="PlayerCardRevised" player-name="{{p.name}}" number="{{p.number}}" position="{{p.position}}" initials="{{p.initials}}" bio="{{p.bio}}" hint-size="220px,260px"></dc-import>
       </sc-for>
     </div>
   </div>

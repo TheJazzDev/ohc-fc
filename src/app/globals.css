@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  --color-bg: oklch(0.12 0.01 260);
+  --color-surface: oklch(0.16 0.01 260);
+  --color-surface-2: oklch(0.2 0.015 260);
+  --color-fg: oklch(0.96 0.01 260);
+  --color-muted: oklch(0.65 0.02 260);
+  --color-accent: oklch(0.87 0.22 125);
+  --color-accent-dim: oklch(0.45 0.09 125);
+  --color-accent-hot: oklch(0.93 0.25 125);
+  --color-accent-amber: oklch(0.78 0.15 75);
+  --shadow-resting: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-raised: 0 8px 20px -8px rgba(0, 0, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-floating-lit: 0 20px 44px -14px rgba(0, 0, 0, 0.8), 0 0 18px -8px oklch(0.78 0.15 75 / 0.5),
+    0 0 40px -12px oklch(0.87 0.22 125 / 0.4);
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-surface: var(--color-surface);
+  --color-surface-2: var(--color-surface-2);
+  --color-fg: var(--color-fg);
+  --color-muted: var(--color-muted);
+  --color-accent: var(--color-accent);
+  --color-accent-dim: var(--color-accent-dim);
+  --color-accent-hot: var(--color-accent-hot);
+  --color-accent-amber: var(--color-accent-amber);
+  --shadow-resting: var(--shadow-resting);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-floating-lit: var(--shadow-floating-lit);
+  --font-heading: var(--font-oswald);
+  --font-body: var(--font-work-sans);
+  --animate-flood-pulse: flood-pulse 3.5s ease-in-out infinite;
+  --animate-beam-breathe: beam-breathe 5s ease-in-out infinite;
+  --animate-reveal-up: reveal-up 380ms ease-out both;
+}
+
+@keyframes flood-pulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.95;
+  }
+}
+
+@keyframes beam-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}

@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Position {
+  GK
+  CB
+  FB
+  DM
+  CM
+  AM
+  W
+  ST
+}
+
+enum PlayerStatus {
+  FIRST_TEAM
+  RESERVE
+}
+
+enum Venue {
+  HOME
+  AWAY
+}
+
+enum FixtureStatus {
+  SCHEDULED
+  PLAYED
+  POSTPONED
+  CANCELLED
+}
+
+enum LineupRole {
+  STARTER
+  BENCH
+}
+
+model AdminUser {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+}
+
+model Player {
+  id        String       @id @default(cuid())
+  name      String
+  number    Int          @unique
+  position  Position
+  status    PlayerStatus @default(FIRST_TEAM)
+  active    Boolean      @default(true)
+  photoUrl  String?
+  bio       String?
+  slots     LineupSlot[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model Fixture {
+  id              String        @id @default(cuid())
+  opponent        String
+  competition     String
+  round           String?
+  kickoff         DateTime
+  venue           Venue         @default(HOME)
+  ground          String?
+  formation       String        @default("4-3-3")
+  lineupAnnounced Boolean       @default(false)
+  status          FixtureStatus @default(SCHEDULED)
+  ourScore        Int?
+  theirScore      Int?
+  scorers         String?
+  slots           LineupSlot[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@unique([kickoff, opponent])
+}
+
+model LineupSlot {
+  id        String     @id @default(cuid())
+  fixtureId String
+  fixture   Fixture    @relation(fields: [fixtureId], references: [id], onDelete: Cascade)
+  playerId  String
+  player    Player     @relation(fields: [playerId], references: [id])
+  role      LineupRole
+  slotIndex Int
+  label     String
+
+  @@unique([fixtureId, playerId])
+  @@unique([fixtureId, role, slotIndex])
+}
