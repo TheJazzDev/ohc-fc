@@ -32,7 +32,7 @@ export function PlayerFlipCard({ name, number, pos, initials, bio, photoUrl = nu
       tabIndex={0}
       onClick={toggle}
       onKeyDown={handleKeyDown}
-      className="cursor-pointer rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      className="cursor-pointer rounded-md outline-none focus-visible:ring-2 focus-visible:ring-accent"
       style={{ perspective: "1200px" }}
     >
       <div
@@ -44,7 +44,7 @@ export function PlayerFlipCard({ name, number, pos, initials, bio, photoUrl = nu
         }}
       >
         <div
-          className="col-start-1 row-start-1 flex h-full flex-col items-center justify-center gap-3 rounded-2xl border border-fg/10 bg-surface-2 px-4 py-5 text-center shadow-resting transition-[background-color,box-shadow] duration-150 hover:bg-[oklch(0.24_0.015_260)] hover:shadow-raised active:scale-[0.98]"
+          className="col-start-1 row-start-1 flex h-full flex-col items-center justify-center gap-3 rounded-md border border-fg/10 bg-surface-2 px-4 py-5 text-center shadow-resting transition-[background-color,box-shadow] duration-150 hover:bg-[oklch(0.24_0.015_260)] hover:shadow-raised active:scale-[0.98]"
           style={{ backfaceVisibility: "hidden", opacity: flipped ? 0 : 1, transition: "opacity 0ms 250ms" }}
         >
           {photoUrl ? (
@@ -69,7 +69,7 @@ export function PlayerFlipCard({ name, number, pos, initials, bio, photoUrl = nu
         </div>
 
         <div
-          className="col-start-1 row-start-1 flex h-full flex-col justify-between gap-2.5 overflow-hidden rounded-2xl border border-accent/35 bg-[oklch(0.24_0.015_260)] px-4 py-[18px]"
+          className="col-start-1 row-start-1 flex h-full flex-col justify-between gap-2.5 overflow-hidden rounded-md border border-accent/35 bg-[oklch(0.24_0.015_260)] px-4 py-[18px]"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)", opacity: flipped ? 1 : 0, transition: "opacity 0ms 250ms" }}
         >
           <div className="flex items-baseline justify-between gap-2">

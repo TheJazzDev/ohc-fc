@@ -29,16 +29,16 @@ export default async function HomePage() {
         >
           <LightBeams />
           <Grain opacity={0.45} />
-          <div className="relative mx-auto flex max-w-6xl flex-col-reverse items-center gap-8 px-4 py-14 sm:px-8 sm:py-16 lg:flex-row lg:justify-between lg:gap-12 lg:py-20">
+          <div className="relative mx-auto flex max-w-app flex-col-reverse items-center gap-8 px-4 py-14 sm:px-8 sm:py-16 lg:flex-row lg:justify-between lg:gap-12 lg:py-20">
             <div className="animate-reveal-up flex max-w-xl flex-col gap-4 text-center lg:text-left">
               <div className="flex items-center justify-center gap-2 font-heading text-xs font-medium tracking-[0.14em] text-muted uppercase lg:justify-start">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                 Est. 2026 · Non-league
               </div>
               <h1 className="font-heading text-4xl leading-[0.95] font-bold text-balance uppercase tracking-tight sm:text-5xl lg:text-6xl">
-                Home of the{" "}
+                Blessed{" "}
                 <span className="bg-[linear-gradient(100deg,var(--color-accent)_0%,var(--color-accent-amber)_100%)] bg-clip-text text-transparent">
-                  badge
+                  Ground
                 </span>
               </h1>
               <p className="text-pretty text-lg leading-relaxed text-fg sm:text-xl">
@@ -55,12 +55,12 @@ export default async function HomePage() {
 
         <SquadPitchPreview players={players} />
 
-        <section className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 sm:flex-row sm:px-8 sm:py-10">
+        <section className="mx-auto flex max-w-app flex-col gap-4 px-4 py-8 sm:flex-row sm:px-8 sm:py-10">
           <div className="sm:flex-1">
             {nextMatch ? (
               <NextMatchCard match={nextMatch} />
             ) : (
-              <div className="flex h-full flex-col justify-center gap-1.5 rounded-2xl border border-fg/10 bg-surface-2 p-6 shadow-resting [clip-path:polygon(0_0,calc(100%-32px)_0,100%_32px,100%_100%,0_100%)]">
+              <div className="flex h-full flex-col justify-center gap-1.5 rounded-md border border-fg/10 bg-surface-2 p-6 shadow-resting [clip-path:polygon(0_0,calc(100%-32px)_0,100%_32px,100%_100%,0_100%)]">
                 <span className="font-heading text-xs font-semibold tracking-[0.14em] text-muted uppercase">
                   Next match
                 </span>
@@ -73,7 +73,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="mx-auto flex max-w-6xl flex-col gap-10 border-t border-fg/10 px-4 py-8 sm:px-8 sm:py-12 lg:flex-row lg:gap-12 lg:py-16">
+        <section className="mx-auto flex max-w-app flex-col gap-10 border-t border-fg/10 px-4 py-8 sm:px-8 sm:py-12 lg:flex-row lg:gap-12 lg:py-16">
           <div className="flex flex-col gap-5 lg:w-[380px] lg:flex-none">
             <h2 className="font-heading text-2xl leading-none font-semibold uppercase sm:text-3xl">Last result</h2>
             {lastResult ? (

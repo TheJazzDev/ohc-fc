@@ -19,7 +19,7 @@ export default function SitemapPage() {
       >
         <LightBeams />
         <Grain opacity={0.45} />
-        <div className="relative mx-auto flex max-w-6xl flex-col-reverse items-center gap-8 px-4 py-14 sm:px-8 sm:py-16 lg:flex-row lg:justify-between lg:gap-12 lg:py-20">
+        <div className="relative mx-auto flex max-w-app flex-col-reverse items-center gap-8 px-4 py-14 sm:px-8 sm:py-16 lg:flex-row lg:justify-between lg:gap-12 lg:py-20">
           <div className="animate-reveal-up flex max-w-xl flex-col gap-4 text-center lg:text-left">
             <div className="flex items-center justify-center gap-2 font-heading text-xs font-medium tracking-[0.14em] text-muted uppercase lg:justify-start">
               <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -43,7 +43,7 @@ export default function SitemapPage() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-6xl flex-col gap-5 px-4 py-8 sm:gap-6 sm:px-8 sm:py-12 lg:py-16">
+      <section className="mx-auto flex max-w-app flex-col gap-5 px-4 py-8 sm:gap-6 sm:px-8 sm:py-12 lg:py-16">
         <div className="flex items-baseline justify-between">
           <h2 className="font-heading text-2xl font-semibold uppercase sm:text-3xl lg:text-4xl">Pages</h2>
           <span className="font-heading text-[11px] tracking-[0.12em] text-muted sm:text-xs">390 · 834 · 1440</span>

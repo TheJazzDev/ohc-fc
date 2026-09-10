@@ -17,7 +17,7 @@ export function DeleteFixtureButton({ id }: { id: string }) {
           });
         }
       }}
-      className="text-sm text-red-400 hover:text-red-300 disabled:opacity-50"
+      className="cursor-pointer text-sm text-red-400 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {pending ? "Deleting..." : "Delete fixture"}
     </button>

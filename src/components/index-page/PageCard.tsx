@@ -8,7 +8,7 @@ export function PageCard({ num, label, href, description, widths, delayMs = 0 }:
     <Link
       href={href}
       style={{ animationDelay: `${delayMs}ms` }}
-      className={`animate-reveal-up group flex flex-col gap-3 rounded-2xl border border-fg/10 bg-surface-2 p-5 text-fg no-underline shadow-resting transition-[background-color,box-shadow,transform] duration-150 hover:bg-[oklch(0.24_0.015_260)] hover:shadow-floating-lit active:scale-[0.99] sm:p-6 ${CARD_CUT}`}
+      className={`animate-reveal-up group flex flex-col gap-3 rounded-md border border-fg/10 bg-surface-2 p-5 text-fg no-underline shadow-resting transition-[background-color,box-shadow,transform] duration-150 hover:bg-[oklch(0.24_0.015_260)] hover:shadow-floating-lit active:scale-[0.99] sm:p-6 ${CARD_CUT}`}
     >
       <div className="flex items-baseline justify-between">
         <span className="skew-x-[-7deg] font-heading text-base font-bold tracking-tight text-muted tabular-nums">

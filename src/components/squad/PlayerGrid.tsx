@@ -4,7 +4,7 @@ import type { Player } from "./types";
 export function PlayerGrid({ players }: { players: Player[] }) {
   if (players.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-fg/15 px-6 py-16 text-center">
+      <div className="flex flex-col items-center justify-center gap-2 rounded-md border border-dashed border-fg/15 px-6 py-16 text-center">
         <span className="font-heading text-lg font-semibold uppercase">No players match yet</span>
         <p className="m-0 max-w-xs text-sm text-muted">Try a different filter, or check back once more of the squad is confirmed.</p>
       </div>

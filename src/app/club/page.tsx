@@ -18,7 +18,7 @@ export default function ClubPage() {
       >
         <LightBeams />
         <Grain opacity={0.45} />
-        <div className="relative mx-auto flex max-w-6xl flex-col gap-8 px-4 py-14 sm:px-8 sm:py-16 lg:flex-row lg:items-start lg:gap-16 lg:py-20">
+        <div className="relative mx-auto flex max-w-app flex-col gap-8 px-4 py-14 sm:px-8 sm:py-16 lg:flex-row lg:items-start lg:gap-16 lg:py-20">
           <div className="animate-reveal-up flex flex-col gap-3">
             <span className="font-heading text-xs font-medium tracking-[0.14em] text-muted uppercase">
               Est. 2026 · Non-league
@@ -56,7 +56,7 @@ export default function ClubPage() {
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-6xl flex-col gap-5 border-b border-fg/10 px-4 py-8 sm:gap-6 sm:px-8 sm:py-12">
+      <section className="mx-auto flex max-w-app flex-col gap-5 border-b border-fg/10 px-4 py-8 sm:gap-6 sm:px-8 sm:py-12">
         <div className="flex items-baseline justify-between">
           <h2 className="font-heading text-2xl font-semibold uppercase sm:text-3xl">Partners</h2>
           <span className="font-heading text-[11px] tracking-[0.12em] text-muted sm:text-xs">2026/27 sponsors</span>
@@ -68,7 +68,7 @@ export default function ClubPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-8 sm:grid-cols-3 sm:gap-10 sm:px-8 sm:py-12">
+      <section className="mx-auto grid max-w-app grid-cols-1 gap-8 px-4 py-8 sm:grid-cols-3 sm:gap-10 sm:px-8 sm:py-12">
         <div className="flex flex-col gap-3">
           <h2 className="font-heading text-2xl font-semibold uppercase sm:text-3xl">Find us</h2>
           <p className="m-0 text-base leading-relaxed text-muted">
@@ -96,7 +96,7 @@ export default function ClubPage() {
               <a
                 key={social}
                 href="#"
-                className="inline-flex h-10 items-center rounded-full border border-fg/20 px-[18px] font-heading text-sm font-semibold tracking-wider uppercase no-underline transition-colors hover:border-accent hover:text-accent"
+                className="inline-flex h-10 items-center rounded-md border border-fg/20 px-[18px] font-heading text-sm font-semibold tracking-wider uppercase no-underline transition-colors hover:border-accent hover:text-accent"
               >
                 {social}
               </a>

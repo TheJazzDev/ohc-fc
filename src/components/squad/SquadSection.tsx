@@ -24,7 +24,7 @@ export function SquadSection({ roster }: { roster: Player[] }) {
   return (
     <div className="flex flex-col gap-6 lg:grid lg:grid-cols-[300px_1fr] lg:items-start lg:gap-10">
       <div
-        className={`animate-reveal-up relative flex flex-col gap-5 rounded-2xl border border-fg/10 bg-surface-2/70 p-6 shadow-raised backdrop-blur-sm lg:sticky lg:top-6 ${PANEL_CUT}`}
+        className={`animate-reveal-up relative flex flex-col gap-5 rounded-md border border-fg/10 bg-surface-2/70 p-6 shadow-raised backdrop-blur-sm lg:sticky lg:top-6 ${PANEL_CUT}`}
       >
         <div className="flex flex-col gap-1.5">
           <span className="font-heading text-[11px] font-medium tracking-[0.14em] text-muted uppercase">

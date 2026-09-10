@@ -62,7 +62,7 @@ export function LineupPicker({
         <select
           value={formation}
           onChange={(event) => handleFormationChange(event.target.value as Formation)}
-          className="rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
+          className="rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
         >
           {FORMATION_OPTIONS.map((option) => (
             <option key={option} value={option}>
@@ -91,13 +91,13 @@ export function LineupPicker({
 
       <BenchPicker players={benchCandidates} selected={bench} onToggle={handleBenchToggle} />
 
-      <label className="flex items-center gap-2.5 text-sm">
+      <label className="flex cursor-pointer items-center gap-2.5 text-sm">
         <input
           type="checkbox"
           name="announced"
           checked={announced}
           onChange={(event) => setAnnounced(event.target.checked)}
-          className="h-4 w-4 accent-[var(--color-accent)]"
+          className="h-4 w-4 cursor-pointer accent-[var(--color-accent)]"
         />
         Announce this lineup on the public site
       </label>
@@ -107,7 +107,7 @@ export function LineupPicker({
       <button
         type="submit"
         disabled={pending}
-        className="rounded-lg bg-accent px-4 py-2.5 font-heading text-sm font-bold tracking-wide text-surface uppercase disabled:opacity-50 sm:text-base"
+        className="cursor-pointer rounded-md bg-accent px-4 py-2.5 font-heading text-sm font-bold tracking-wide text-surface uppercase disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
       >
         {pending ? "Saving..." : "Save lineup"}
       </button>

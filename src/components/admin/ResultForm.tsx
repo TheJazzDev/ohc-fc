@@ -10,7 +10,7 @@ type ResultFormValues = {
 };
 
 const INPUT_CLASS =
-  "rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base";
+  "rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base";
 
 export function ResultForm({
   action,
@@ -71,7 +71,7 @@ export function ResultForm({
       <button
         type="submit"
         disabled={pending}
-        className="mt-1 rounded-lg bg-accent px-4 py-2.5 font-heading text-sm font-bold tracking-wide text-surface uppercase disabled:opacity-50 sm:text-base"
+        className="mt-1 cursor-pointer rounded-md bg-accent px-4 py-2.5 font-heading text-sm font-bold tracking-wide text-surface uppercase disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
       >
         {pending ? "Saving..." : "Save result"}
       </button>

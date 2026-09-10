@@ -6,7 +6,7 @@ export function NewsFeedCard({ item, delayMs = 0 }: { item: NewsItem; delayMs?: 
     <Link
       href={`/news/${item.slug}`}
       style={{ animationDelay: `${delayMs}ms` }}
-      className="animate-reveal-up flex flex-col overflow-hidden rounded-2xl border border-fg/10 bg-surface-2 text-fg no-underline shadow-resting transition-[background-color,box-shadow] hover:bg-[oklch(0.24_0.015_260)] hover:shadow-raised [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]"
+      className="animate-reveal-up flex flex-col overflow-hidden rounded-md border border-fg/10 bg-surface-2 text-fg no-underline shadow-resting transition-[background-color,box-shadow] hover:bg-[oklch(0.24_0.015_260)] hover:shadow-raised [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]"
     >
       <div
         className="flex aspect-video items-end justify-between p-4"

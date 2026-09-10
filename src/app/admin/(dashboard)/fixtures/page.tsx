@@ -14,7 +14,7 @@ export default async function AdminFixturesPage() {
         <h1 className="font-heading text-xl font-bold uppercase sm:text-2xl">Fixtures</h1>
         <Link
           href="/admin/fixtures/new"
-          className="rounded-lg bg-accent px-3.5 py-2 font-heading text-xs font-bold tracking-wide text-surface uppercase no-underline sm:text-sm"
+          className="rounded-md bg-accent px-3.5 py-2 font-heading text-xs font-bold tracking-wide text-surface uppercase no-underline sm:text-sm"
         >
           Add fixture
         </Link>

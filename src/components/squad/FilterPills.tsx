@@ -28,7 +28,7 @@ export function FilterPills({
             key={label}
             type="button"
             onClick={() => onChange(label)}
-            className={`h-10 flex-none rounded-full border px-[18px] font-heading text-sm font-semibold tracking-wider uppercase outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97] ${
+            className={`h-10 flex-none cursor-pointer rounded-md border px-[18px] font-heading text-sm font-semibold tracking-wider uppercase outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent active:scale-[0.97] ${
               isActive ? "border-fg bg-fg text-surface" : "border-fg/20 bg-transparent text-muted"
             }`}
           >

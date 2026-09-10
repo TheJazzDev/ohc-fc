@@ -40,9 +40,11 @@ enum LineupRole {
 }
 
 model AdminUser {
-  id           String @id @default(cuid())
-  email        String @unique
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
   passwordHash String
+  createdAt    DateTime @default(now())
 }
 
 model Player {

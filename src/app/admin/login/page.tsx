@@ -17,20 +17,20 @@ export default function AdminLoginPage() {
           placeholder="Email"
           required
           autoFocus
-          className="h-14 rounded-lg border border-fg/20 bg-surface-2 px-4 text-base text-fg outline-none focus:border-accent sm:text-lg"
+          className="h-14 rounded-md border border-fg/20 bg-surface-2 px-4 text-base text-fg outline-none focus:border-accent sm:text-lg"
         />
         <input
           name="password"
           type="password"
           placeholder="Password"
           required
-          className="h-14 rounded-lg border border-fg/20 bg-surface-2 px-4 text-base text-fg outline-none focus:border-accent sm:text-lg"
+          className="h-14 rounded-md border border-fg/20 bg-surface-2 px-4 text-base text-fg outline-none focus:border-accent sm:text-lg"
         />
         {error && <p className="text-sm text-red-400">{error}</p>}
         <button
           type="submit"
           disabled={pending}
-          className="mt-2 h-14 rounded-lg bg-accent px-4 font-heading text-base font-bold tracking-wide text-surface uppercase disabled:opacity-50 sm:text-lg"
+          className="mt-2 h-14 cursor-pointer rounded-md bg-accent px-4 font-heading text-base font-bold tracking-wide text-surface uppercase disabled:cursor-not-allowed disabled:opacity-50 sm:text-lg"
         >
           {pending ? "Signing in..." : "Sign in"}
         </button>

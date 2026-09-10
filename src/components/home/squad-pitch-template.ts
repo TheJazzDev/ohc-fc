@@ -5,7 +5,7 @@ type TemplateEntry = [PitchSlotPosition, number, number];
 // Generic 4-3-3 shape: [position, x-across 0-100, y-depth 0-100 from own goal].
 // Not tied to a real match lineup — used to preview how the squad is filling out.
 const TEMPLATE: TemplateEntry[] = [
-  ["GK", 50, 12],
+  ["GK", 50, 6],
   ["DF", 15, 28],
   ["DF", 38, 23],
   ["DF", 62, 23],

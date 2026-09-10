@@ -16,7 +16,7 @@ export function AdminFixtureRow({ fixture }: { fixture: FixtureRowData }) {
   const scoreLabel = fixture.ourScore != null && fixture.theirScore != null ? `${fixture.ourScore}–${fixture.theirScore}` : null;
 
   return (
-    <li className="flex flex-col gap-2 rounded-lg border border-fg/10 bg-surface-2 px-3.5 py-2.5 text-sm sm:flex-row sm:items-center sm:justify-between sm:text-base">
+    <li className="flex flex-col gap-2 rounded-md border border-fg/10 bg-surface-2 px-3.5 py-2.5 text-sm sm:flex-row sm:items-center sm:justify-between sm:text-base">
       <span className="flex flex-wrap items-center gap-2">
         <span className="font-heading font-bold">
           {fixture.venue === "HOME" ? "vs" : "@"} {fixture.opponent}

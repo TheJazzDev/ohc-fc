@@ -5,7 +5,7 @@ export function FeaturedArticleCard({ article }: { article: ArticleBody }) {
   return (
     <Link
       href={`/news/${article.slug}`}
-      className="animate-reveal-up grid grid-cols-1 overflow-hidden rounded-2xl border border-fg/10 bg-surface-2 text-fg no-underline shadow-resting transition-[background-color,box-shadow] hover:bg-[oklch(0.24_0.015_260)] hover:shadow-floating-lit sm:grid-cols-2 [clip-path:polygon(0_0,calc(100%-32px)_0,100%_32px,100%_100%,0_100%)]"
+      className="animate-reveal-up grid grid-cols-1 overflow-hidden rounded-md border border-fg/10 bg-surface-2 text-fg no-underline shadow-resting transition-[background-color,box-shadow] hover:bg-[oklch(0.24_0.015_260)] hover:shadow-floating-lit sm:grid-cols-2 [clip-path:polygon(0_0,calc(100%-32px)_0,100%_32px,100%_100%,0_100%)]"
     >
       <div
         className="flex aspect-video flex-col justify-end gap-1.5 p-6 sm:p-8"

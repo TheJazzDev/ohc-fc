@@ -9,6 +9,7 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   const email = process.env.ADMIN_EMAIL;
   const password = process.env.ADMIN_PASSWORD;
+  const name = process.env.ADMIN_NAME ?? "Admin";
   if (!email || !password) {
     throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set");
   }
@@ -18,7 +19,7 @@ async function main() {
   await prisma.adminUser.upsert({
     where: { email },
     update: { passwordHash },
-    create: { email, passwordHash },
+    create: { name, email, passwordHash },
   });
 
   console.log(`Admin user ready: ${email}`);

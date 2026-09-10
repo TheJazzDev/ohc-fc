@@ -5,9 +5,9 @@ export function NextMatchCard({ match }: { match: NextMatch }) {
   return (
     <Link
       href="/matchday"
-      className="group relative block rounded-2xl bg-accent/35 no-underline"
+      className="group relative block rounded-md bg-accent/35 no-underline"
     >
-      <div className="flex flex-col gap-2.5 rounded-2xl border border-fg/10 bg-surface-2 p-6 shadow-resting transition-[background-color,box-shadow] group-hover:bg-[oklch(0.24_0.015_260)] group-hover:shadow-floating-lit [clip-path:polygon(0_0,calc(100%-32px)_0,100%_32px,100%_100%,0_100%)]">
+      <div className="flex flex-col gap-2.5 rounded-md border border-fg/10 bg-surface-2 p-6 shadow-resting transition-[background-color,box-shadow] group-hover:bg-[oklch(0.24_0.015_260)] group-hover:shadow-floating-lit [clip-path:polygon(0_0,calc(100%-32px)_0,100%_32px,100%_100%,0_100%)]">
         <span className="font-heading text-xs font-semibold tracking-[0.14em] text-accent uppercase">Next match</span>
         <span className="font-heading text-2xl leading-tight font-semibold sm:text-[28px]">vs {match.opponent}</span>
         <span className="text-sm leading-relaxed text-muted sm:text-base">

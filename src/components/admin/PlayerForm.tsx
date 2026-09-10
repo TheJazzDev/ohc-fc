@@ -53,7 +53,7 @@ export function PlayerForm({
           name="name"
           defaultValue={initialValues?.name}
           required
-          className="rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
+          className="rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
         />
       </label>
 
@@ -65,7 +65,7 @@ export function PlayerForm({
           min={1}
           defaultValue={initialValues?.number}
           required
-          className="rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
+          className="rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
         />
       </label>
 
@@ -74,7 +74,7 @@ export function PlayerForm({
         <select
           name="position"
           defaultValue={initialValues?.position ?? "GK"}
-          className="rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
+          className="rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
         >
           <option value="GK">Goalkeeper</option>
           <option value="CB">Center Back</option>
@@ -92,7 +92,7 @@ export function PlayerForm({
         <select
           name="status"
           defaultValue={initialValues?.status ?? "FIRST_TEAM"}
-          className="rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
+          className="rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
         >
           <option value="FIRST_TEAM">First team</option>
           <option value="RESERVE">Reserve</option>
@@ -105,7 +105,7 @@ export function PlayerForm({
           name="bio"
           defaultValue={initialValues?.bio ?? ""}
           rows={3}
-          className="rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
+          className="rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
         />
       </label>
 
@@ -125,7 +125,7 @@ export function PlayerForm({
       <button
         type="submit"
         disabled={pending || uploading}
-        className="mt-1 rounded-lg bg-accent px-4 py-2.5 font-heading text-sm font-bold tracking-wide text-surface uppercase disabled:opacity-50 sm:text-base"
+        className="mt-1 cursor-pointer rounded-md bg-accent px-4 py-2.5 font-heading text-sm font-bold tracking-wide text-surface uppercase disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
       >
         {pending ? "Saving..." : "Save player"}
       </button>

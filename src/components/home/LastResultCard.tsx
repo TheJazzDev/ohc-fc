@@ -3,7 +3,7 @@ import type { LastResult } from "./types";
 
 export function LastResultCard({ result }: { result: LastResult }) {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-fg/10 bg-surface-2 p-6">
+    <div className="flex flex-col gap-4 rounded-md border border-fg/10 bg-surface-2 p-6">
       <div className="flex justify-between font-heading text-[11px] font-medium tracking-[0.12em] text-muted">
         <span>
           {result.competition} · {result.venue === "HOME" ? "HOME" : "AWAY"}

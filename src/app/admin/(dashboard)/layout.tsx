@@ -16,12 +16,15 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Link href="/admin/fixtures" className="font-heading text-xs font-medium tracking-[0.1em] text-muted uppercase no-underline hover:text-accent">
               Fixtures
             </Link>
+            <Link href="/admin/admins" className="font-heading text-xs font-medium tracking-[0.1em] text-muted uppercase no-underline hover:text-accent">
+              Admins
+            </Link>
           </nav>
         </div>
         <form action={logoutAction}>
           <button
             type="submit"
-            className="font-heading text-xs font-medium tracking-[0.1em] text-muted uppercase hover:text-accent"
+            className="cursor-pointer font-heading text-xs font-medium tracking-[0.1em] text-muted uppercase hover:text-accent"
           >
             Sign out
           </button>

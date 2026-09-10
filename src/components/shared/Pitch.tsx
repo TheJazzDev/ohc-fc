@@ -26,7 +26,7 @@ function PitchMarkings() {
 export function Pitch({ landscape = false }: { landscape?: boolean }) {
   if (landscape) {
     return (
-      <svg viewBox="0 0 105 68" preserveAspectRatio="none" className="block h-full w-full overflow-hidden rounded-2xl">
+      <svg viewBox="0 0 105 68" preserveAspectRatio="none" className="block h-full w-full overflow-hidden rounded-md">
         <defs>
           <linearGradient id="pitch-gradient-landscape" x1="0" y1="0" x2="0" y2="1">
             <stop offset={0} stopColor="oklch(0.36 0.1 150)" />
@@ -49,7 +49,7 @@ export function Pitch({ landscape = false }: { landscape?: boolean }) {
   }
 
   return (
-    <svg viewBox="0 0 68 105" preserveAspectRatio="none" className="block h-full w-full overflow-hidden rounded-2xl">
+    <svg viewBox="0 0 68 105" preserveAspectRatio="none" className="block h-full w-full overflow-hidden rounded-md">
       <defs>
         <linearGradient id="pitch-gradient-portrait" x1="0" y1="0" x2="0" y2="1">
           <stop offset={0} stopColor="oklch(0.36 0.1 150)" />

@@ -31,7 +31,7 @@ export function ResultRow({ result, delayMs = 0 }: { result: MatchResult; delayM
   return (
     <Link
       href="/news"
-      className="animate-reveal-up block border-b border-fg/8 text-fg no-underline transition-[background-color,box-shadow] hover:bg-surface-2 hover:shadow-raised md:rounded-2xl"
+      className="animate-reveal-up block border-b border-fg/8 text-fg no-underline transition-[background-color,box-shadow] hover:bg-surface-2 hover:shadow-raised md:rounded-md"
       style={{ animationDelay: `${delayMs}ms` }}
     >
       <div className="grid grid-cols-[10px_1fr_auto] items-center gap-3 py-4 md:hidden">

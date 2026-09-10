@@ -47,7 +47,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             </p>
           ))}
 
-          <div className="flex flex-col gap-2 rounded-2xl border border-fg/10 bg-surface-2 p-5 shadow-resting [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]">
+          <div className="flex flex-col gap-2 rounded-md border border-fg/10 bg-surface-2 p-5 shadow-resting [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]">
             <span className="font-heading text-[11px] font-medium tracking-[0.12em] text-muted uppercase">
               OHC FC · Starting XI
             </span>
@@ -57,7 +57,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
           <Link
             href="/fixtures"
-            className="inline-flex h-11 w-fit items-center justify-center rounded-full border border-accent px-5 font-heading text-sm font-semibold tracking-wider text-accent uppercase no-underline transition-colors hover:bg-accent/12"
+            className="inline-flex h-11 w-fit items-center justify-center rounded-md border border-accent px-5 font-heading text-sm font-semibold tracking-wider text-accent uppercase no-underline transition-colors hover:bg-accent/12"
           >
             All results
           </Link>

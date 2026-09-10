@@ -58,7 +58,7 @@ export function LeagueTable({ rows, delayMs = 0 }: { rows: TableRow[]; delayMs?:
             style={{ animationDelay: `${delayMs + index * 70}ms` }}
           >
             <div
-              className={`grid min-h-11 grid-cols-[28px_minmax(0,1fr)_32px_40px_44px] items-center gap-2 rounded-lg border-l-2 px-1 transition-colors hover:bg-surface-2 sm:min-h-14 sm:grid-cols-[44px_minmax(0,1fr)_repeat(6,44px)_52px_64px] sm:gap-2 sm:px-4 ${
+              className={`grid min-h-11 grid-cols-[28px_minmax(0,1fr)_32px_40px_44px] items-center gap-2 rounded-md border-l-2 px-1 transition-colors hover:bg-surface-2 sm:min-h-14 sm:grid-cols-[44px_minmax(0,1fr)_repeat(6,44px)_52px_64px] sm:gap-2 sm:px-4 ${
                 isUs ? "border-l-accent bg-accent/[9%] shadow-resting" : "border-l-transparent"
               }`}
             >

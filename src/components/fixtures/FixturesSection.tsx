@@ -31,7 +31,7 @@ export function FixturesSection({
   return (
     <>
       <div
-        className={`animate-reveal-up relative flex flex-col gap-6 rounded-2xl border border-fg/10 bg-surface-2/70 p-6 shadow-raised backdrop-blur-sm lg:col-start-1 lg:row-start-1 lg:row-span-3 ${PANEL_CUT}`}
+        className={`animate-reveal-up relative flex flex-col gap-6 rounded-md border border-fg/10 bg-surface-2/70 p-6 shadow-raised backdrop-blur-sm lg:col-start-1 lg:row-start-1 lg:row-span-3 ${PANEL_CUT}`}
       >
         <div className="flex flex-col gap-1.5">
           <span className="font-heading text-[11px] font-medium tracking-[0.14em] text-muted uppercase">
@@ -42,7 +42,7 @@ export function FixturesSection({
           </h1>
         </div>
 
-        <div className="grid w-full grid-cols-3 gap-1 rounded-full border border-fg/10 bg-surface-2 p-1 lg:inline-grid lg:w-auto lg:grid-flow-col">
+        <div className="grid w-full grid-cols-3 gap-1 rounded-md border border-fg/10 bg-surface-2 p-1 lg:inline-grid lg:w-auto lg:grid-flow-col">
           {TABS.map((t) => {
             const isActive = t.key === tab;
             return (
@@ -50,7 +50,7 @@ export function FixturesSection({
                 key={t.key}
                 type="button"
                 onClick={() => setTab(t.key)}
-                className={`h-10 rounded-full font-heading text-sm font-semibold tracking-wider uppercase outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent lg:h-9 lg:px-5 ${
+                className={`h-10 cursor-pointer rounded-md font-heading text-sm font-semibold tracking-wider uppercase outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent lg:h-9 lg:px-5 ${
                   isActive ? "bg-fg text-surface" : "text-muted"
                 }`}
               >

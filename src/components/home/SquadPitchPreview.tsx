@@ -39,7 +39,7 @@ export function SquadPitchPreview({ players }: { players: RosterPlayer[] }) {
   const complete = filledCount === total;
 
   return (
-    <section className="mx-auto flex max-w-6xl flex-col gap-5 border-b border-fg/10 px-4 py-8 sm:gap-6 sm:px-8 sm:py-12 lg:py-16">
+    <section className="mx-auto flex max-w-app flex-col gap-5 border-b border-fg/10 px-4 py-8 sm:gap-6 sm:px-8 sm:py-12 lg:py-16">
       <div className="flex items-baseline justify-between gap-4">
         <h2 className="font-heading text-2xl leading-none font-semibold uppercase sm:text-3xl lg:text-4xl">
           The squad
@@ -86,7 +86,7 @@ export function SquadPitchPreview({ players }: { players: RosterPlayer[] }) {
 
       <Link
         href="/squad"
-        className="mx-auto inline-flex h-11 items-center justify-center rounded-full border border-accent px-5 font-heading text-sm font-semibold tracking-wider text-accent uppercase no-underline transition-colors hover:bg-accent/12"
+        className="mx-auto inline-flex h-11 items-center justify-center rounded-md border border-accent px-5 font-heading text-sm font-semibold tracking-wider text-accent uppercase no-underline transition-colors hover:bg-accent/12"
       >
         View full squad
       </Link>

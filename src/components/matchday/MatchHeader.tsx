@@ -7,7 +7,7 @@ export function MatchHeader({ match }: { match: MatchInfo }) {
 
   return (
     <div
-      className={`animate-reveal-up relative flex flex-col gap-4 rounded-2xl border border-fg/10 bg-surface-2/70 p-6 shadow-raised backdrop-blur-sm sm:p-7 ${PANEL_CUT}`}
+      className={`animate-reveal-up relative flex flex-col gap-4 rounded-md border border-fg/10 bg-surface-2/70 p-6 shadow-raised backdrop-blur-sm sm:p-7 ${PANEL_CUT}`}
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
         <div className="flex flex-col gap-1.5">
@@ -23,11 +23,11 @@ export function MatchHeader({ match }: { match: MatchInfo }) {
         </div>
 
         <div className="flex flex-none items-center gap-2">
-          <span className="inline-flex h-8 items-center rounded-full bg-accent px-4 font-heading text-xs font-bold tracking-wider whitespace-nowrap text-surface uppercase sm:h-[34px] sm:px-[18px] sm:text-[13px]">
+          <span className="inline-flex h-8 items-center rounded-md bg-accent px-4 font-heading text-xs font-bold tracking-wider whitespace-nowrap text-surface uppercase sm:h-[34px] sm:px-[18px] sm:text-[13px]">
             {statusLabel}
           </span>
           {match.announced && (
-            <span className="inline-flex h-8 items-center rounded-full border border-accent/40 px-4 font-heading text-xs font-semibold tracking-wider whitespace-nowrap uppercase sm:h-[34px] sm:px-[18px] sm:text-[13px]">
+            <span className="inline-flex h-8 items-center rounded-md border border-accent/40 px-4 font-heading text-xs font-semibold tracking-wider whitespace-nowrap uppercase sm:h-[34px] sm:px-[18px] sm:text-[13px]">
               {match.formation}
             </span>
           )}

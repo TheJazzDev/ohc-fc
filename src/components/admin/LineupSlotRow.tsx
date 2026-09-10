@@ -24,7 +24,7 @@ export function LineupSlotRow({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="rounded-lg border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
+        className="rounded-md border border-fg/20 bg-surface-2 px-3 py-2.5 text-sm text-fg outline-none focus:border-accent sm:text-base"
       >
         <option value="">— Select player —</option>
         {suggested.length > 0 && (

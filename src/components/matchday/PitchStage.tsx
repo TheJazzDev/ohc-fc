@@ -6,8 +6,8 @@ import type { LineupSlotView, MatchInfo } from "./types";
 
 function EmptyLineupCard() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-surface/62 p-6">
-      <div className="flex max-w-xs flex-col items-center gap-3 rounded-2xl border border-fg/12 bg-surface-2 px-6 py-7 text-center shadow-floating-lit [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]">
+    <div className="absolute inset-0 flex items-center justify-center rounded-md bg-surface/62 p-6">
+      <div className="flex max-w-xs flex-col items-center gap-3 rounded-md border border-fg/12 bg-surface-2 px-6 py-7 text-center shadow-floating-lit [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="13" r="8" />
           <path d="M12 9v4l2.5 2M9 2h6" />
@@ -18,7 +18,7 @@ function EmptyLineupCard() {
         </p>
         <Link
           href="/squad"
-          className="mt-1 inline-flex h-11 items-center justify-center rounded-full border border-accent px-5 font-heading text-sm font-semibold tracking-wider text-accent uppercase no-underline transition-colors hover:bg-accent/12"
+          className="mt-1 inline-flex h-11 items-center justify-center rounded-md border border-accent px-5 font-heading text-sm font-semibold tracking-wider text-accent uppercase no-underline transition-colors hover:bg-accent/12"
         >
           Browse the squad
         </Link>
@@ -29,8 +29,8 @@ function EmptyLineupCard() {
 
 function IncompleteLineupCard() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-surface/62 p-6">
-      <div className="flex max-w-xs flex-col items-center gap-3 rounded-2xl border border-fg/12 bg-surface-2 px-6 py-7 text-center shadow-floating-lit [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]">
+    <div className="absolute inset-0 flex items-center justify-center rounded-md bg-surface/62 p-6">
+      <div className="flex max-w-xs flex-col items-center gap-3 rounded-md border border-fg/12 bg-surface-2 px-6 py-7 text-center shadow-floating-lit [clip-path:polygon(0_0,calc(100%-24px)_0,100%_24px,100%_100%,0_100%)]">
         <div className="font-heading text-xl leading-tight font-semibold uppercase">Lineup still being set</div>
         <p className="m-0 text-pretty text-sm leading-relaxed text-muted">
           The starting XI hasn&apos;t been fully confirmed yet. Check back closer to kickoff.

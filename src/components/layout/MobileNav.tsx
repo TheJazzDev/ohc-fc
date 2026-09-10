@@ -14,7 +14,7 @@ export function MobileNav({ items, activeLabel }: { items: NavItem[]; activeLabe
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
-        className="-mr-2.5 flex h-11 w-11 items-center justify-center rounded text-fg outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="-mr-2.5 flex h-11 w-11 cursor-pointer items-center justify-center rounded text-fg outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
           {open ? (

@@ -13,7 +13,7 @@ export function BenchList({ bench }: { bench: BenchPlayer[] }) {
         {bench.map((player, index) => (
           <div
             key={player.number}
-            className="animate-reveal-up flex w-[120px] flex-none flex-col items-center gap-2 rounded-2xl border border-fg/8 bg-surface-2 px-2.5 py-4 shadow-resting [clip-path:polygon(0_0,calc(100%-20px)_0,100%_20px,100%_100%,0_100%)]"
+            className="animate-reveal-up flex w-[120px] flex-none flex-col items-center gap-2 rounded-md border border-fg/8 bg-surface-2 px-2.5 py-4 shadow-resting [clip-path:polygon(0_0,calc(100%-20px)_0,100%_20px,100%_100%,0_100%)]"
             style={{ animationDelay: `${index * 70}ms` }}
           >
             <Jersey number={player.number} variant="outline" size={52} />
@@ -32,7 +32,7 @@ export function BenchList({ bench }: { bench: BenchPlayer[] }) {
           >
             <Jersey number={player.number} variant="outline" size={48} />
             <div className="flex-1 font-heading text-base leading-tight font-semibold">{player.name}</div>
-            <span className="inline-flex h-6 items-center rounded-full border border-accent/35 px-2.5 font-heading text-[11px] font-semibold tracking-wider text-muted">
+            <span className="inline-flex h-6 items-center rounded-md border border-accent/35 px-2.5 font-heading text-[11px] font-semibold tracking-wider text-muted">
               {player.pos}
             </span>
           </div>

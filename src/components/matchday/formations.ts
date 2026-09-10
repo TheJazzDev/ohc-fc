@@ -8,7 +8,7 @@ export type FormationSlot = { label: string; position: Position; x: number; y: n
 
 const FORMATIONS: Record<Formation, FormationSlot[]> = {
   "4-3-3": [
-    { label: "GK", position: "GK", x: 50, y: 12 },
+    { label: "GK", position: "GK", x: 50, y: 6 },
     { label: "LB", position: "FB", x: 15, y: 28 },
     { label: "CB", position: "CB", x: 38, y: 23 },
     { label: "CB", position: "CB", x: 62, y: 23 },
@@ -21,7 +21,7 @@ const FORMATIONS: Record<Formation, FormationSlot[]> = {
     { label: "RW", position: "W", x: 82, y: 78 },
   ],
   "4-4-2": [
-    { label: "GK", position: "GK", x: 50, y: 12 },
+    { label: "GK", position: "GK", x: 50, y: 6 },
     { label: "LB", position: "FB", x: 15, y: 28 },
     { label: "CB", position: "CB", x: 38, y: 23 },
     { label: "CB", position: "CB", x: 62, y: 23 },
@@ -34,7 +34,7 @@ const FORMATIONS: Record<Formation, FormationSlot[]> = {
     { label: "ST", position: "ST", x: 62, y: 82 },
   ],
   "3-5-2": [
-    { label: "GK", position: "GK", x: 50, y: 12 },
+    { label: "GK", position: "GK", x: 50, y: 6 },
     { label: "CB", position: "CB", x: 25, y: 26 },
     { label: "CB", position: "CB", x: 50, y: 21 },
     { label: "CB", position: "CB", x: 75, y: 26 },
