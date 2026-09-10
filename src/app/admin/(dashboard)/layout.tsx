@@ -3,6 +3,12 @@ import { logoutAction } from "@/actions/auth";
 import { LogoMark } from "@/components/layout/LogoMark";
 import { AdminNavLink } from "@/components/admin/AdminNavLink";
 
+// Every screen under here is authenticated, per-user, always-fresh admin
+// data — never statically prerender it (also sidesteps the database not
+// being reachable during the build step, e.g. when DATABASE_URL is a
+// Vercel "Sensitive" env var withheld from builds).
+export const dynamic = "force-dynamic";
+
 const NAV_ITEMS = [
   { href: "/admin/players", label: "Players" },
   { href: "/admin/fixtures", label: "Fixtures" },
