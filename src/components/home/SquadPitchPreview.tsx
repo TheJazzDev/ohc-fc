@@ -3,40 +3,16 @@ import { Jersey } from "@/components/shared/Jersey";
 import { Pitch } from "@/components/shared/Pitch";
 import type { Position } from "@/components/squad/types";
 import { formationSlots } from "@/components/matchday/formations";
-import { SQUAD_PITCH_SLOTS, type PitchSlotPosition } from "./squad-pitch-template";
 
-const ZONE_BY_POSITION: Record<Position, PitchSlotPosition> = {
-  GK: "GK",
-  CB: "DF",
-  FB: "DF",
-  DM: "MF",
-  CM: "MF",
-  AM: "MF",
-  W: "FW",
-  ST: "FW",
-};
+const DEFAULT_SHAPE = "4-3-3";
 
 type RosterPlayer = { id: string; number: number; name: string; position: Position };
 type PitchSlotView = { left: number; top: number; player: RosterPlayer | null };
 
-function assignSlots(players: RosterPlayer[]): PitchSlotView[] {
-  const byPosition: Record<PitchSlotPosition, RosterPlayer[]> = { GK: [], DF: [], MF: [], FW: [] };
-  for (const player of players) {
-    byPosition[ZONE_BY_POSITION[player.position]].push(player);
-  }
-  for (const group of Object.values(byPosition)) {
-    group.sort((a, b) => a.number - b.number);
-  }
-
-  return SQUAD_PITCH_SLOTS.map((slot) => ({
-    left: slot.left,
-    top: slot.top,
-    player: byPosition[slot.position].shift() ?? null,
-  }));
-}
-
-// Admin-curated shape for the "Squad showcase" — same slots the real
-// matchday pitch uses, filled with whoever the admin placed in each one.
+// The homepage pitch only ever mirrors the admin-curated showcase — same slots
+// the real matchday pitch uses, filled with whoever the admin placed in each
+// one. Signing a player never puts them on the homepage by itself; until the
+// showcase is published every slot reads TBC.
 function showcaseSlots(formation: string, starterIds: (string | undefined)[], players: RosterPlayer[]): PitchSlotView[] {
   const byId = new Map(players.map((player) => [player.id, player]));
   return formationSlots(formation).map((slot, index) => ({
@@ -49,7 +25,7 @@ function showcaseSlots(formation: string, starterIds: (string | undefined)[], pl
 export type SquadShowcaseData = { formation: string; starterIds: (string | undefined)[] } | null;
 
 export function SquadPitchPreview({ players, showcase }: { players: RosterPlayer[]; showcase: SquadShowcaseData }) {
-  const slots = showcase ? showcaseSlots(showcase.formation, showcase.starterIds, players) : assignSlots(players);
+  const slots = showcaseSlots(showcase?.formation ?? DEFAULT_SHAPE, showcase?.starterIds ?? [], players);
   const filledCount = slots.filter((slot) => slot.player).length;
   const total = slots.length;
   const complete = filledCount === total;

@@ -4,14 +4,10 @@ import { useActionState, useMemo, useState } from "react";
 import Link from "next/link";
 import { Jersey } from "@/components/shared/Jersey";
 import { Pitch } from "@/components/shared/Pitch";
-import {
-  FORMATION_OPTIONS,
-  formationSlots,
-  formationSlotsLandscape,
-  lineGroups,
-  type Formation,
-} from "@/components/matchday/formations";
+import { formationSlots, formationSlotsLandscape, lineGroups } from "@/components/matchday/formations";
 import { ADMIN_BUTTON_PRIMARY, ADMIN_BUTTON_SECONDARY, ADMIN_CARD, ADMIN_LABEL } from "./admin-ui";
+import { FormationChangeNotice, FormationPicker } from "./FormationPicker";
+import { useFormationSlots } from "./useFormationSlots";
 
 const BENCH_MAX = 7;
 
@@ -38,30 +34,28 @@ export function AdminLineupBuilder({
   action: (prevState: string | null, formData: FormData) => Promise<string | null>;
 }) {
   const [error, formAction, pending] = useActionState(action, null);
-  const [formation, setFormation] = useState<Formation>((initial.formation as Formation) || "4-3-3");
-  const [slots, setSlots] = useState<string[]>(() => formationSlots(initial.formation).map((_, i) => initial.starters[i] ?? ""));
+  const {
+    formation,
+    slots,
+    setSlot: seatStarter,
+    changeFormation,
+    undo,
+    undoFormationChange,
+    dismissUndo,
+  } = useFormationSlots(initial.formation, initial.starters);
   const [bench, setBench] = useState<string[]>(initial.bench);
-  const [announced, setAnnounced] = useState(initial.announced);
 
   const formId = "admin-lineup-form";
   const shape = formationSlots(formation);
   const landscapeShape = formationSlotsLandscape(formation);
   const byId = useMemo(() => new Map(players.map((p) => [p.id, p])), [players]);
 
-  function handleFormationChange(next: Formation) {
-    setFormation(next);
-    setSlots(formationSlots(next).map(() => ""));
-  }
+  // `initial.announced` is the saved state, not a draft toggle — each button
+  // says exactly what saving it will do to the public matchday page.
+  const announced = initial.announced;
 
   function setSlot(index: number, playerId: string) {
-    setSlots((prev) => {
-      const next = [...prev];
-      const out = next[index];
-      const at = playerId ? next.indexOf(playerId) : -1;
-      if (at > -1) next[at] = out; // straight swap between two starters
-      next[index] = playerId;
-      return next;
-    });
+    seatStarter(index, playerId);
     setBench((prev) => {
       let next = prev.filter((id) => id !== playerId); // promoted off the bench
       const out = slots[index];
@@ -78,9 +72,10 @@ export function AdminLineupBuilder({
   const filledCount = slots.filter(Boolean).length;
   const benchCandidates = players.filter((p) => !slots.includes(p.id));
   const announceCta = announced ? "Update lineup" : "Announce lineup";
+  const draftCta = announced ? "Unannounce" : "Save draft";
   const announceHelp = announced
     ? "The XI and bench are showing on the Matchday page now."
-    : "Fans see “Lineup not yet announced” until this is switched on.";
+    : "Fans see “Lineup not yet announced” until this is announced.";
 
   return (
     <div className="flex flex-col gap-6">
@@ -97,9 +92,9 @@ export function AdminLineupBuilder({
         </div>
         <div className="flex gap-2">
           <button type="submit" form={formId} name="announced" value="" disabled={pending} className={ADMIN_BUTTON_SECONDARY}>
-            {pending ? "Saving..." : "Save draft"}
+            {pending ? "Saving..." : draftCta}
           </button>
-          <button type="submit" form={formId} name="announced" value={announced ? "on" : ""} disabled={pending} className={ADMIN_BUTTON_PRIMARY}>
+          <button type="submit" form={formId} name="announced" value="on" disabled={pending} className={ADMIN_BUTTON_PRIMARY}>
             {pending ? "Saving..." : announceCta}
           </button>
         </div>
@@ -119,28 +114,14 @@ export function AdminLineupBuilder({
         <div className="flex flex-col gap-4">
           <div className={`${ADMIN_CARD} flex flex-col gap-4`}>
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <span className={ADMIN_LABEL}>Formation</span>
-                <div className="flex gap-0.5 rounded-md border border-fg/12 bg-surface p-[3px]">
-                  {FORMATION_OPTIONS.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => handleFormationChange(option)}
-                      className={`h-[30px] cursor-pointer rounded-md px-3.5 font-heading text-xs font-semibold tracking-[0.08em] tabular-nums transition-colors ${
-                        option === formation ? "bg-fg text-surface" : "text-muted hover:text-fg"
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <span className={`flex items-center gap-2 font-heading text-xs font-semibold tracking-[0.1em] uppercase ${announced ? "text-accent" : "text-muted"}`}>
-                <span className={`h-2 w-2 rounded-full ${announced ? "bg-accent" : "bg-fg/30"}`} />
+              <FormationPicker formation={formation} onChange={changeFormation} />
+              <span className={`flex items-center gap-2 font-heading text-[11px] font-semibold tracking-[0.1em] uppercase sm:text-xs ${announced ? "text-accent" : "text-muted"}`}>
+                <span className={`h-2 w-2 shrink-0 rounded-full ${announced ? "bg-accent" : "bg-fg/30"}`} />
                 {announced ? "Announced · live on the site" : "Draft · not visible to fans"}
               </span>
             </div>
+
+            <FormationChangeNotice undo={undo} onUndo={undoFormationChange} onDismiss={dismissUndo} />
 
             <div className="relative aspect-[105/68] w-full">
               <div className="absolute inset-0">
@@ -208,8 +189,11 @@ export function AdminLineupBuilder({
                 {filledCount} / 11 PICKED
               </span>
             </div>
+            {/* Keyed by slot range, not label: a label-keyed group remounts when
+                the formation changes, and a freshly mounted <select> loses its
+                value to React's post-action form reset. */}
             {lineGroups(formation).map((group) => (
-              <div key={group.label} className="flex flex-col gap-2">
+              <div key={group.from} className="flex flex-col gap-2">
                 <span className="font-heading text-[10px] font-medium tracking-[0.14em] text-muted uppercase">{group.label}</span>
                 {shape.slice(group.from, group.to).map((slot, k) => {
                   const i = group.from + k;
@@ -257,25 +241,14 @@ export function AdminLineupBuilder({
             ))}
           </div>
 
-          <div className={`${ADMIN_CARD} flex flex-col gap-3.5 ${announced ? "border-accent/50" : ""}`}>
-            <div className="flex flex-col gap-1">
-              <span className="font-heading text-sm font-semibold tracking-[0.04em] uppercase">Announce lineup</span>
-              <span className="text-[13px] leading-relaxed text-muted">{announceHelp}</span>
-            </div>
-            <div className="grid grid-cols-2 gap-0.5 rounded-md border border-fg/12 bg-surface p-[3px]">
-              {(["Draft", "Announced"] as const).map((label) => (
-                <button
-                  key={label}
-                  type="button"
-                  onClick={() => setAnnounced(label === "Announced")}
-                  className={`h-8 cursor-pointer rounded-md font-heading text-xs font-semibold tracking-[0.08em] uppercase transition-colors ${
-                    (label === "Announced") === announced ? "bg-fg text-surface" : "text-muted hover:text-fg"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
+          <div className={`${ADMIN_CARD} flex flex-col gap-2 ${announced ? "border-accent/50" : ""}`}>
+            <span className="font-heading text-sm font-semibold tracking-[0.04em] uppercase">Announce lineup</span>
+            <span className="text-[13px] leading-relaxed text-muted">{announceHelp}</span>
+            <span className="text-[13px] leading-relaxed text-muted">
+              <strong className="font-semibold text-fg">{announceCta}</strong> puts this XI on the Matchday page.{" "}
+              <strong className="font-semibold text-fg">{draftCta}</strong>{" "}
+              {announced ? "takes it back down and keeps your picks." : "keeps your picks here without showing them."}
+            </span>
           </div>
         </div>
       </form>

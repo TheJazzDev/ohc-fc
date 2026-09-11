@@ -1,10 +1,12 @@
 "use client";
 
-import { useActionState, useMemo, useState } from "react";
+import { useActionState, useMemo } from "react";
 import { Jersey } from "@/components/shared/Jersey";
 import { Pitch } from "@/components/shared/Pitch";
-import { FORMATION_OPTIONS, formationSlots, lineGroups, type Formation } from "@/components/matchday/formations";
+import { formationSlots, lineGroups } from "@/components/matchday/formations";
 import { ADMIN_BUTTON_PRIMARY, ADMIN_BUTTON_SECONDARY, ADMIN_CARD, ADMIN_LABEL } from "./admin-ui";
+import { FormationChangeNotice, FormationPicker } from "./FormationPicker";
+import { useFormationSlots } from "./useFormationSlots";
 import type { LineupPlayerOption } from "./AdminLineupBuilder";
 
 export type ShowcaseInitial = {
@@ -23,35 +25,24 @@ export function AdminShowcaseBuilder({
   action: (prevState: string | null, formData: FormData) => Promise<string | null>;
 }) {
   const [error, formAction, pending] = useActionState(action, null);
-  const [formation, setFormation] = useState<Formation>((initial.formation as Formation) || "4-3-3");
-  const [slots, setSlots] = useState<string[]>(() => formationSlots(initial.formation).map((_, i) => initial.starters[i] ?? ""));
-  const [live, setLive] = useState(initial.live);
+  const { formation, slots, setSlot, changeFormation, undo, undoFormationChange, dismissUndo } = useFormationSlots(
+    initial.formation,
+    initial.starters,
+  );
 
   const formId = "admin-showcase-form";
   const shape = formationSlots(formation);
   const byId = useMemo(() => new Map(players.map((p) => [p.id, p])), [players]);
 
-  function handleFormationChange(next: Formation) {
-    setFormation(next);
-    setSlots(formationSlots(next).map(() => ""));
-  }
-
-  function setSlot(index: number, playerId: string) {
-    setSlots((prev) => {
-      const next = [...prev];
-      const out = next[index];
-      const at = playerId ? next.indexOf(playerId) : -1;
-      if (at > -1) next[at] = out; // straight swap between two slots
-      next[index] = playerId;
-      return next;
-    });
-  }
-
+  // `initial.live` is the saved state, not a draft toggle — each button says
+  // exactly what saving it will do to the homepage.
+  const live = initial.live;
   const filledCount = slots.filter(Boolean).length;
-  const liveCta = live ? "Update homepage" : "Publish to homepage";
+  const publishCta = live ? "Update homepage" : "Publish to homepage";
+  const draftCta = live ? "Unpublish" : "Save draft";
   const liveHelp = live
     ? "This exact shape and XI are showing on the homepage now."
-    : "Fans see the auto-generated squad graphic until this is switched on.";
+    : "The homepage squad stays empty until this is published — adding players on their own doesn't change it.";
 
   return (
     <div className="flex flex-col gap-6">
@@ -64,10 +55,10 @@ export function AdminShowcaseBuilder({
         </div>
         <div className="flex gap-2">
           <button type="submit" form={formId} name="live" value="" disabled={pending} className={ADMIN_BUTTON_SECONDARY}>
-            {pending ? "Saving..." : "Save draft"}
+            {pending ? "Saving..." : draftCta}
           </button>
-          <button type="submit" form={formId} name="live" value={live ? "on" : ""} disabled={pending} className={ADMIN_BUTTON_PRIMARY}>
-            {pending ? "Saving..." : liveCta}
+          <button type="submit" form={formId} name="live" value="on" disabled={pending} className={ADMIN_BUTTON_PRIMARY}>
+            {pending ? "Saving..." : publishCta}
           </button>
         </div>
       </div>
@@ -83,28 +74,14 @@ export function AdminShowcaseBuilder({
         <div className="flex flex-col gap-4">
           <div className={`${ADMIN_CARD} flex flex-col gap-4`}>
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-3">
-                <span className={ADMIN_LABEL}>Formation</span>
-                <div className="flex flex-wrap gap-0.5 rounded-md border border-fg/12 bg-surface p-[3px]">
-                  {FORMATION_OPTIONS.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => handleFormationChange(option)}
-                      className={`h-[30px] cursor-pointer rounded-md px-3 font-heading text-xs font-semibold tracking-[0.08em] tabular-nums transition-colors ${
-                        option === formation ? "bg-fg text-surface" : "text-muted hover:text-fg"
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <span className={`flex items-center gap-2 font-heading text-xs font-semibold tracking-[0.1em] uppercase ${live ? "text-accent" : "text-muted"}`}>
-                <span className={`h-2 w-2 rounded-full ${live ? "bg-accent" : "bg-fg/30"}`} />
+              <FormationPicker formation={formation} onChange={changeFormation} />
+              <span className={`flex items-center gap-2 font-heading text-[11px] font-semibold tracking-[0.1em] uppercase sm:text-xs ${live ? "text-accent" : "text-muted"}`}>
+                <span className={`h-2 w-2 shrink-0 rounded-full ${live ? "bg-accent" : "bg-fg/30"}`} />
                 {live ? "Live · showing on homepage" : "Draft · not visible on homepage"}
               </span>
             </div>
+
+            <FormationChangeNotice undo={undo} onUndo={undoFormationChange} onDismiss={dismissUndo} />
 
             <div className="relative mx-auto aspect-[68/105] w-full max-w-[380px]">
               <Pitch landscape={false} />
@@ -135,8 +112,11 @@ export function AdminShowcaseBuilder({
                 {filledCount} / 11 PICKED
               </span>
             </div>
+            {/* Keyed by slot range, not label: a label-keyed group remounts when
+                the formation changes, and a freshly mounted <select> loses its
+                value to React's post-action form reset. */}
             {lineGroups(formation).map((group) => (
-              <div key={group.label} className="flex flex-col gap-2">
+              <div key={group.from} className="flex flex-col gap-2">
                 <span className="font-heading text-[10px] font-medium tracking-[0.14em] text-muted uppercase">{group.label}</span>
                 {shape.slice(group.from, group.to).map((slot, k) => {
                   const i = group.from + k;
@@ -182,25 +162,14 @@ export function AdminShowcaseBuilder({
             ))}
           </div>
 
-          <div className={`${ADMIN_CARD} flex flex-col gap-3.5 ${live ? "border-accent/50" : ""}`}>
-            <div className="flex flex-col gap-1">
-              <span className="font-heading text-sm font-semibold tracking-[0.04em] uppercase">Homepage visibility</span>
-              <span className="text-[13px] leading-relaxed text-muted">{liveHelp}</span>
-            </div>
-            <div className="grid grid-cols-2 gap-0.5 rounded-md border border-fg/12 bg-surface p-[3px]">
-              {(["Draft", "Live"] as const).map((label) => (
-                <button
-                  key={label}
-                  type="button"
-                  onClick={() => setLive(label === "Live")}
-                  className={`h-8 cursor-pointer rounded-md font-heading text-xs font-semibold tracking-[0.08em] uppercase transition-colors ${
-                    (label === "Live") === live ? "bg-fg text-surface" : "text-muted hover:text-fg"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
+          <div className={`${ADMIN_CARD} flex flex-col gap-2 ${live ? "border-accent/50" : ""}`}>
+            <span className="font-heading text-sm font-semibold tracking-[0.04em] uppercase">Homepage visibility</span>
+            <span className="text-[13px] leading-relaxed text-muted">{liveHelp}</span>
+            <span className="text-[13px] leading-relaxed text-muted">
+              <strong className="font-semibold text-fg">{publishCta}</strong> puts this XI on the homepage.{" "}
+              <strong className="font-semibold text-fg">{draftCta}</strong>{" "}
+              {live ? "takes it back down and keeps your picks." : "keeps your picks here without showing them."}
+            </span>
           </div>
         </div>
       </form>
