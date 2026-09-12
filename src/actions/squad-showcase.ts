@@ -52,10 +52,8 @@ export async function saveSquadShowcase(_prevState: string | null, formData: For
 
   const live = formData.get("live") === "on";
 
-  if (live && starterIds.some((id) => !id)) {
-    return "Fill every slot before publishing to the homepage";
-  }
-
+  // A part-filled XI publishes fine — the homepage draws the unfilled spots as
+  // TBC, which is the point of the showcase while the squad comes together.
   const filledStarterIds = starterIds.filter((id): id is string => !!id);
   const duplicate = findDuplicatePlayer(filledStarterIds);
   if (duplicate) return "A player can only appear once in the showcase";
