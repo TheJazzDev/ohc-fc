@@ -120,7 +120,7 @@ export function AdminPlayerForm({
                 className="flex h-[180px] w-[180px] items-center justify-center rounded-md border border-fg/14 font-mono text-[10px] font-medium tracking-[0.1em] text-muted uppercase"
                 style={{ background: "repeating-linear-gradient(135deg, oklch(0.30 0.02 260) 0 6px, oklch(0.26 0.015 260) 6px 12px)" }}
               >
-                current photo
+                no photo
               </div>
             )}
             <label className="flex w-full cursor-pointer flex-col items-center gap-2 rounded-md border border-dashed border-fg/22 p-5 text-center transition-colors hover:border-accent hover:bg-[oklch(0.24_0.015_260)]">
@@ -135,6 +135,18 @@ export function AdminPlayerForm({
               </span>
               <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handlePhotoChange} className="hidden" />
             </label>
+            {photoUrl && (
+              <button
+                type="button"
+                onClick={() => {
+                  setPhotoUrl("");
+                  setUploadError(null);
+                }}
+                className="font-heading text-[11px] font-semibold tracking-[0.1em] text-muted uppercase hover:text-red-400"
+              >
+                Remove photo
+              </button>
+            )}
             {uploading && <span className="text-xs text-muted">Uploading...</span>}
             {uploadError && <span className="text-xs text-red-400">{uploadError}</span>}
           </div>

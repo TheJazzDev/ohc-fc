@@ -1,6 +1,7 @@
 import { test, expect } from "bun:test";
 import {
   fitWithin,
+  isManagedPhotoUrl,
   isTokenRequestFailure,
   photoFileName,
   photoUploadMessage,
@@ -81,4 +82,17 @@ test("names an unconfigured blob store, with the detail", () => {
 
 test("falls back to pointing at the server logs for an unknown reason", () => {
   expect(readinessMessage(500)).toContain("server logs");
+});
+
+test("recognises photos this app uploaded to its own blob store", () => {
+  expect(isManagedPhotoUrl("https://bqj7rlv9uiausb3w.public.blob.vercel-storage.com/players/abc.webp")).toBe(true);
+});
+
+test("refuses to treat anything else as ours, so cleanup can't delete it", () => {
+  expect(isManagedPhotoUrl("https://bqj7rlv9uiausb3w.public.blob.vercel-storage.com/other/abc.webp")).toBe(false);
+  expect(isManagedPhotoUrl("https://evil.example.com/players/abc.webp")).toBe(false);
+  expect(isManagedPhotoUrl("http://bqj7rlv9uiausb3w.public.blob.vercel-storage.com/players/a.webp")).toBe(false);
+  expect(isManagedPhotoUrl("not a url")).toBe(false);
+  expect(isManagedPhotoUrl("")).toBe(false);
+  expect(isManagedPhotoUrl(null)).toBe(false);
 });

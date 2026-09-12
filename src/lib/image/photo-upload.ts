@@ -95,3 +95,20 @@ export function photoUploadMessage(cause: unknown): string {
   }
   return "Photo upload failed. Try again.";
 }
+
+/**
+ * True for a URL this app uploaded to its own Blob store.
+ *
+ * Guards the cleanup that runs when a player's photo changes: only files we
+ * put under `players/` are ever deleted, never an arbitrary URL someone
+ * managed to get into the field.
+ */
+export function isManagedPhotoUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  try {
+    const { protocol, hostname, pathname } = new URL(url);
+    return protocol === "https:" && hostname.endsWith(".public.blob.vercel-storage.com") && pathname.startsWith("/players/");
+  } catch {
+    return false;
+  }
+}

@@ -19,6 +19,7 @@ export default async function AdminShowcasePage() {
           number: player.number,
           name: player.name,
           position: player.position,
+          photoUrl: player.photoUrl,
         }))}
         initial={initial}
         action={saveSquadShowcase}

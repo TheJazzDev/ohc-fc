@@ -43,6 +43,7 @@ export default async function FixtureLineupPage({ params }: { params: Promise<{ 
           number: player.number,
           name: player.name,
           position: player.position,
+          photoUrl: player.photoUrl,
         }))}
         initial={initial}
         matchTitle={`vs ${fixture.opponent}`}

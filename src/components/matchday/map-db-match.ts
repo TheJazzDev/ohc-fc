@@ -6,7 +6,7 @@ type DbSlot = {
   slotIndex: number;
   label: string;
   role: "STARTER" | "BENCH";
-  player: { number: number; name: string; position: string };
+  player: { number: number; name: string; position: string; photoUrl: string | null };
 };
 
 type DbFixture = {
@@ -43,6 +43,7 @@ export function mapStarters(slots: DbSlot[]): LineupSlotView[] {
       label: slot.label,
       number: slot.player.number,
       name: slot.player.name,
+      photoUrl: slot.player.photoUrl,
     }));
 }
 
@@ -54,5 +55,6 @@ export function mapBench(slots: DbSlot[]): BenchPlayer[] {
       number: slot.player.number,
       name: slot.player.name,
       pos: slot.player.position as BenchPlayer["pos"],
+      photoUrl: slot.player.photoUrl,
     }));
 }

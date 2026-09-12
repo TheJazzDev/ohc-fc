@@ -11,7 +11,7 @@ import { useFormationSlots } from "./useFormationSlots";
 
 const BENCH_MAX = 7;
 
-export type LineupPlayerOption = { id: string; number: number; name: string; position: string };
+export type LineupPlayerOption = { id: string; number: number; name: string; position: string; photoUrl: string | null };
 
 export type LineupInitial = {
   formation: string;

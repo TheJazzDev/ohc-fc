@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { Jersey } from "@/components/shared/Jersey";
+import { PlayerToken } from "@/components/shared/PlayerToken";
 import { Pitch } from "@/components/shared/Pitch";
 import { useSlotDrag } from "./useSlotDrag";
 
@@ -9,7 +9,7 @@ export type PitchBoardEntry = {
   label: string;
   left: number;
   top: number;
-  player?: { number: number; name: string };
+  player?: { number: number; name: string; photoUrl?: string | null };
 };
 
 /**
@@ -59,7 +59,7 @@ export function AdminPitchBoard({
             } ${dragging ? "z-20 scale-110 opacity-90" : "z-10 transition-[left,top] duration-150"}`}
           >
             <div className={`rounded-full ${isTarget ? "ring-2 ring-accent ring-offset-2 ring-offset-transparent" : ""}`}>
-              <Jersey number={entry.player?.number ?? 0} variant={entry.player ? "filled" : "outline"} size={40} />
+              <PlayerToken number={entry.player?.number ?? 0} name={entry.player?.name} photoUrl={entry.player?.photoUrl} size={40} variant={entry.player ? "filled" : "outline"} />
             </div>
             <span className="pointer-events-none rounded-md bg-surface/88 px-1.5 py-0.5 text-[10px] font-medium tracking-wide whitespace-nowrap uppercase">
               {entry.player ? entry.player.name.split(" ").slice(-1)[0] : entry.label}

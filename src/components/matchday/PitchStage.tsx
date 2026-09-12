@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Jersey } from "@/components/shared/Jersey";
+import { PlayerToken } from "@/components/shared/PlayerToken";
 import { Pitch } from "@/components/shared/Pitch";
 import { formationSlots } from "./formations";
 import type { LineupSlotView, MatchInfo } from "./types";
@@ -52,7 +52,7 @@ function Markers({ formation, starters }: { formation: MatchInfo["formation"]; s
             className="animate-reveal-up absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
             style={{ left: `${slot.x}%`, top: `${100 - slot.y}%`, animationDelay: `${index * 70}ms` }}
           >
-            <Jersey number={starter.number} variant="filled" size={60} />
+            <PlayerToken number={starter.number} name={starter.name} photoUrl={starter.photoUrl} size={60} />
             <span className="rounded bg-surface/85 px-2 py-0.5 font-heading text-xs font-medium tracking-wide whitespace-nowrap uppercase">
               {starter.name}
             </span>

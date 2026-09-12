@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Jersey } from "@/components/shared/Jersey";
+import { PlayerToken } from "@/components/shared/PlayerToken";
 import { Pitch } from "@/components/shared/Pitch";
 import type { Position } from "@/components/squad/types";
 import { formationSlots } from "@/components/matchday/formations";
 
 const DEFAULT_SHAPE = "4-3-3";
 
-type RosterPlayer = { id: string; number: number; name: string; position: Position };
+type RosterPlayer = { id: string; number: number; name: string; position: Position; photoUrl: string | null };
 type PitchSlotView = { left: number; top: number; player: RosterPlayer | null };
 
 // The homepage pitch only ever mirrors the admin-curated showcase — same slots
@@ -57,7 +57,7 @@ export function SquadPitchPreview({ players, showcase }: { players: RosterPlayer
           >
             {slot.player ? (
               <>
-                <Jersey number={slot.player.number} variant="filled" size={52} />
+                <PlayerToken number={slot.player.number} name={slot.player.name} photoUrl={slot.player.photoUrl} size={52} />
                 <span className="rounded bg-surface/85 px-1.5 py-0.5 font-heading text-[11px] font-medium tracking-wide whitespace-nowrap uppercase">
                   {slot.player.name}
                 </span>
