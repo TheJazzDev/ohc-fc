@@ -3,7 +3,7 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { upload } from "@vercel/blob/client";
-import { photoUploadMessage, preparePhoto } from "@/lib/image/photo-upload";
+import { isTokenRequestFailure, photoUploadMessage, preparePhoto, readinessMessage } from "@/lib/image/photo-upload";
 import { PlayerFlipCard } from "@/components/squad/PlayerFlipCard";
 import { initialsFromName } from "@/lib/initials";
 import { ADMIN_BUTTON_PRIMARY, ADMIN_BUTTON_SECONDARY, ADMIN_CARD, ADMIN_H1, ADMIN_INPUT, ADMIN_LABEL } from "./admin-ui";
@@ -63,7 +63,19 @@ export function AdminPlayerForm({
       const blob = await upload(photo.name, photo, { access: "public", handleUploadUrl: "/api/player-photo-upload" });
       setPhotoUrl(blob.url);
     } catch (cause) {
-      setUploadError(photoUploadMessage(cause));
+      // The blob client reports every failed token request identically, so ask
+      // the route itself what actually went wrong.
+      if (isTokenRequestFailure(cause)) {
+        try {
+          const probe = await fetch("/api/player-photo-upload");
+          const body = await probe.json().catch(() => ({}));
+          setUploadError(readinessMessage(probe.status, body?.reason, body?.detail));
+        } catch {
+          setUploadError("Couldn't reach the server. Check your connection and try again.");
+        }
+      } else {
+        setUploadError(photoUploadMessage(cause));
+      }
     } finally {
       setUploading(false);
       event.target.value = ""; // let the same file be re-picked after a failure

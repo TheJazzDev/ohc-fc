@@ -31,7 +31,13 @@ export function fitWithin(width: number, height: number, maxEdge: number) {
  * replace another's the moment two people both upload "IMG_1234.jpg".
  */
 export function photoFileName() {
-  return `players/${crypto.randomUUID()}.webp`;
+  // randomUUID is missing outside a secure context — reaching a dev server on
+  // its LAN address, for one — so keep a plain fallback.
+  const id =
+    typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  return `players/${id}.webp`;
 }
 
 /** Decodes, downscales and re-encodes a picked file ready for upload. */
@@ -57,6 +63,22 @@ export async function preparePhoto(file: File, maxEdge = MAX_PHOTO_EDGE): Promis
   if (!blob) throw new UnreadableImageError(file.type);
 
   return new File([blob], photoFileName(), { type: "image/webp" });
+}
+
+/** True when a thrown error is the blob client's opaque token failure. */
+export function isTokenRequestFailure(cause: unknown): boolean {
+  return cause instanceof Error && /retrieve the client token/i.test(cause.message);
+}
+
+/** Explains a token failure, given what the upload route reports over GET. */
+export function readinessMessage(status: number, reason?: string, detail?: string): string {
+  if (status === 401 || reason === "signed-out") {
+    return "Your admin session has expired. Sign in again, then re-pick the photo.";
+  }
+  if (reason === "blob-not-configured") {
+    return `Photo storage isn't configured for this environment${detail ? ` (${detail})` : ""}. Link the Blob store to this deployment.`;
+  }
+  return "Photo storage rejected the upload. Check the server logs for the reason.";
 }
 
 /** Turns a thrown upload failure into something the admin can act on. */
