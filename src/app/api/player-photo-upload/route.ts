@@ -13,9 +13,11 @@ export async function POST(request: Request): Promise<NextResponse> {
   const jsonResponse = await handleUpload({
     body,
     request,
+    // The browser downscales to WebP before uploading, so this is only a
+    // backstop for anything that reaches the route un-resized.
     onBeforeGenerateToken: async () => ({
       allowedContentTypes: ["image/png", "image/jpeg", "image/webp"],
-      maximumSizeInBytes: 5 * 1024 * 1024,
+      maximumSizeInBytes: 10 * 1024 * 1024,
     }),
     onUploadCompleted: async () => {},
   });

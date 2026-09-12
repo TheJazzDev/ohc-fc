@@ -3,6 +3,7 @@
 import { useActionState, useState } from "react";
 import Link from "next/link";
 import { upload } from "@vercel/blob/client";
+import { photoUploadMessage, preparePhoto } from "@/lib/image/photo-upload";
 import { PlayerFlipCard } from "@/components/squad/PlayerFlipCard";
 import { initialsFromName } from "@/lib/initials";
 import { ADMIN_BUTTON_PRIMARY, ADMIN_BUTTON_SECONDARY, ADMIN_CARD, ADMIN_H1, ADMIN_INPUT, ADMIN_LABEL } from "./admin-ui";
@@ -56,12 +57,16 @@ export function AdminPlayerForm({
     setUploading(true);
     setUploadError(null);
     try {
-      const blob = await upload(file.name, file, { access: "public", handleUploadUrl: "/api/player-photo-upload" });
+      // Shrink before uploading: a raw phone photo is far bigger than the card
+      // ever renders, and used to blow straight through the size limit.
+      const photo = await preparePhoto(file);
+      const blob = await upload(photo.name, photo, { access: "public", handleUploadUrl: "/api/player-photo-upload" });
       setPhotoUrl(blob.url);
-    } catch {
-      setUploadError("Photo upload failed. Try again.");
+    } catch (cause) {
+      setUploadError(photoUploadMessage(cause));
     } finally {
       setUploading(false);
+      event.target.value = ""; // let the same file be re-picked after a failure
     }
   }
 
@@ -112,7 +117,10 @@ export function AdminPlayerForm({
                 <path d="M4 16v3h16v-3" />
               </svg>
               <span className="font-heading text-xs font-semibold tracking-[0.1em] uppercase">Replace photo</span>
-              <span className="text-xs leading-relaxed text-muted">JPG or PNG, square, at least 600×600. Left blank, the card falls back to initials.</span>
+              <span className="text-xs leading-relaxed text-muted">
+                JPG, PNG or WebP, square, at least 600×600 — large photos are resized automatically. Left blank, the
+                card falls back to initials.
+              </span>
               <input type="file" accept="image/png,image/jpeg,image/webp" onChange={handlePhotoChange} className="hidden" />
             </label>
             {uploading && <span className="text-xs text-muted">Uploading...</span>}
