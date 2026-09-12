@@ -2,11 +2,11 @@
 
 import { useActionState, useMemo, useState } from "react";
 import Link from "next/link";
-import { Jersey } from "@/components/shared/Jersey";
-import { Pitch } from "@/components/shared/Pitch";
-import { formationSlots, formationSlotsLandscape, lineGroups } from "@/components/matchday/formations";
+import { formationSlotsLandscape } from "@/components/matchday/formations";
 import { ADMIN_BUTTON_PRIMARY, ADMIN_BUTTON_SECONDARY, ADMIN_CARD, ADMIN_LABEL } from "./admin-ui";
+import { AdminPitchBoard } from "./AdminPitchBoard";
 import { FormationChangeNotice, FormationPicker } from "./FormationPicker";
+import { StartingXiPicker } from "./StartingXiPicker";
 import { useFormationSlots } from "./useFormationSlots";
 
 const BENCH_MAX = 7;
@@ -46,9 +46,13 @@ export function AdminLineupBuilder({
   const [bench, setBench] = useState<string[]>(initial.bench);
 
   const formId = "admin-lineup-form";
-  const shape = formationSlots(formation);
-  const landscapeShape = formationSlotsLandscape(formation);
   const byId = useMemo(() => new Map(players.map((p) => [p.id, p])), [players]);
+  const entries = formationSlotsLandscape(formation).map((slot, i) => ({
+    label: slot.label,
+    left: slot.left,
+    top: slot.top,
+    player: byId.get(slots[i]),
+  }));
 
   // `initial.announced` is the saved state, not a draft toggle — each button
   // says exactly what saving it will do to the public matchday page.
@@ -69,7 +73,6 @@ export function AdminLineupBuilder({
     setBench((prev) => (prev.includes(playerId) ? prev.filter((id) => id !== playerId) : prev.length >= BENCH_MAX ? prev : prev.concat(playerId)));
   }
 
-  const filledCount = slots.filter(Boolean).length;
   const benchCandidates = players.filter((p) => !slots.includes(p.id));
   const announceCta = announced ? "Update lineup" : "Announce lineup";
   const draftCta = announced ? "Unannounce" : "Save draft";
@@ -102,7 +105,10 @@ export function AdminLineupBuilder({
 
       {error && <p className="text-sm text-red-400">{error}</p>}
 
-      <form id={formId} action={formAction} className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
+      {/* The form carries only the hidden fields. React resets a form after a
+          server action, which would snap every <select> inside it back to the
+          value it first mounted with — blanking the XI after a save. */}
+      <form id={formId} action={formAction} className="hidden">
         <input type="hidden" name="formation" value={formation} />
         {slots.map((playerId, i) => (
           <input key={i} type="hidden" name={`slot-${i}`} value={playerId} />
@@ -110,6 +116,9 @@ export function AdminLineupBuilder({
         {bench.map((id) => (
           <input key={id} type="hidden" name="bench" value={id} />
         ))}
+      </form>
+
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
 
         <div className="flex flex-col gap-4">
           <div className={`${ADMIN_CARD} flex flex-col gap-4`}>
@@ -123,26 +132,11 @@ export function AdminLineupBuilder({
 
             <FormationChangeNotice undo={undo} onUndo={undoFormationChange} onDismiss={dismissUndo} />
 
-            <div className="relative aspect-[105/68] w-full">
-              <div className="absolute inset-0">
-                <Pitch landscape />
-              </div>
-              {landscapeShape.map((slot, i) => {
-                const player = byId.get(slots[i]);
-                return (
-                  <div
-                    key={i}
-                    className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1"
-                    style={{ left: `${slot.left}%`, top: `${slot.top}%` }}
-                  >
-                    <Jersey number={player?.number ?? 0} variant={player ? "filled" : "outline"} size={40} />
-                    <span className="rounded-md bg-surface/88 px-1.5 py-0.5 text-[10px] font-medium tracking-wide whitespace-nowrap uppercase">
-                      {player ? player.name.split(" ").slice(-1)[0] : slot.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <AdminPitchBoard entries={entries} landscape onSwap={(from, to) => setSlot(to, slots[from])} />
+
+            <span className="text-center text-[11px] text-muted sm:text-xs">
+              Drag a shirt to move it — drop it on another to swap the two.
+            </span>
           </div>
 
           <div className={`${ADMIN_CARD} flex flex-col gap-3.5`}>
@@ -183,62 +177,13 @@ export function AdminLineupBuilder({
 
         <div className="flex flex-col gap-4">
           <div className={`${ADMIN_CARD} flex flex-col gap-4`}>
-            <div className="flex items-baseline justify-between">
-              <span className={ADMIN_LABEL}>Starting XI</span>
-              <span className={`font-heading text-xs font-semibold tracking-[0.1em] ${filledCount === 11 ? "text-accent" : "text-muted"}`}>
-                {filledCount} / 11 PICKED
-              </span>
-            </div>
-            {/* Keyed by slot range, not label: a label-keyed group remounts when
-                the formation changes, and a freshly mounted <select> loses its
-                value to React's post-action form reset. */}
-            {lineGroups(formation).map((group) => (
-              <div key={group.from} className="flex flex-col gap-2">
-                <span className="font-heading text-[10px] font-medium tracking-[0.14em] text-muted uppercase">{group.label}</span>
-                {shape.slice(group.from, group.to).map((slot, k) => {
-                  const i = group.from + k;
-                  const currentId = slots[i];
-                  const suggested = players.filter((p) => p.position === slot.position);
-                  const rest = players.filter((p) => p.position !== slot.position);
-                  return (
-                    <div key={i} className="grid grid-cols-[48px_minmax(0,1fr)] items-center gap-2.5">
-                      <span className="flex h-[34px] items-center justify-center rounded-md border border-fg/12 bg-surface font-heading text-[11px] font-semibold tracking-[0.08em]">
-                        {slot.label}
-                      </span>
-                      <select
-                        value={currentId}
-                        onChange={(e) => setSlot(i, e.target.value)}
-                        className="h-[34px] cursor-pointer rounded-md border border-fg/14 bg-surface px-2.5 text-sm outline-none focus:border-accent"
-                      >
-                        <option value="">— Select player —</option>
-                        {suggested.length > 0 && (
-                          <optgroup label="Suggested">
-                            {suggested.map((p) => (
-                              <option key={p.id} value={p.id}>
-                                #{p.number} {p.name}
-                                {p.id !== currentId && slots.includes(p.id) ? " · starting" : ""}
-                                {bench.includes(p.id) ? " · bench" : ""}
-                              </option>
-                            ))}
-                          </optgroup>
-                        )}
-                        {rest.length > 0 && (
-                          <optgroup label="Other">
-                            {rest.map((p) => (
-                              <option key={p.id} value={p.id}>
-                                #{p.number} {p.name} · {p.position}
-                                {p.id !== currentId && slots.includes(p.id) ? " · starting" : ""}
-                                {bench.includes(p.id) ? " · bench" : ""}
-                              </option>
-                            ))}
-                          </optgroup>
-                        )}
-                      </select>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+            <StartingXiPicker
+              formation={formation}
+              slots={slots}
+              players={players}
+              onSelect={setSlot}
+              note={(playerId) => (bench.includes(playerId) ? " · bench" : "")}
+            />
           </div>
 
           <div className={`${ADMIN_CARD} flex flex-col gap-2 ${announced ? "border-accent/50" : ""}`}>
@@ -251,7 +196,7 @@ export function AdminLineupBuilder({
             </span>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

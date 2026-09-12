@@ -1,11 +1,11 @@
 "use client";
 
 import { useActionState, useMemo } from "react";
-import { Jersey } from "@/components/shared/Jersey";
-import { Pitch } from "@/components/shared/Pitch";
-import { formationSlots, lineGroups } from "@/components/matchday/formations";
-import { ADMIN_BUTTON_PRIMARY, ADMIN_BUTTON_SECONDARY, ADMIN_CARD, ADMIN_LABEL } from "./admin-ui";
+import { formationSlots } from "@/components/matchday/formations";
+import { ADMIN_BUTTON_PRIMARY, ADMIN_BUTTON_SECONDARY, ADMIN_CARD } from "./admin-ui";
+import { AdminPitchBoard } from "./AdminPitchBoard";
 import { FormationChangeNotice, FormationPicker } from "./FormationPicker";
+import { StartingXiPicker } from "./StartingXiPicker";
 import { useFormationSlots } from "./useFormationSlots";
 import type { LineupPlayerOption } from "./AdminLineupBuilder";
 
@@ -31,18 +31,23 @@ export function AdminShowcaseBuilder({
   );
 
   const formId = "admin-showcase-form";
-  const shape = formationSlots(formation);
   const byId = useMemo(() => new Map(players.map((p) => [p.id, p])), [players]);
 
   // `initial.live` is the saved state, not a draft toggle — each button says
   // exactly what saving it will do to the homepage.
   const live = initial.live;
-  const filledCount = slots.filter(Boolean).length;
   const publishCta = live ? "Update homepage" : "Publish to homepage";
   const draftCta = live ? "Unpublish" : "Save draft";
   const liveHelp = live
     ? "This exact shape and XI are showing on the homepage now."
     : "The homepage squad stays empty until this is published — adding players on their own doesn't change it.";
+
+  const entries = formationSlots(formation).map((slot, i) => ({
+    label: slot.label,
+    left: slot.x,
+    top: 100 - slot.y,
+    player: byId.get(slots[i]),
+  }));
 
   return (
     <div className="flex flex-col gap-6">
@@ -65,12 +70,17 @@ export function AdminShowcaseBuilder({
 
       {error && <p className="text-sm text-red-400">{error}</p>}
 
-      <form id={formId} action={formAction} className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
+      {/* The form carries only the hidden fields. React resets a form after a
+          server action, which would snap every <select> inside it back to the
+          value it first mounted with — blanking the XI after a save. */}
+      <form id={formId} action={formAction} className="hidden">
         <input type="hidden" name="formation" value={formation} />
         {slots.map((playerId, i) => (
           <input key={i} type="hidden" name={`slot-${i}`} value={playerId} />
         ))}
+      </form>
 
+      <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
         <div className="flex flex-col gap-4">
           <div className={`${ADMIN_CARD} flex flex-col gap-4`}>
             <div className="flex flex-wrap items-center justify-between gap-3">
@@ -83,83 +93,17 @@ export function AdminShowcaseBuilder({
 
             <FormationChangeNotice undo={undo} onUndo={undoFormationChange} onDismiss={dismissUndo} />
 
-            <div className="relative mx-auto aspect-[68/105] w-full max-w-[380px]">
-              <Pitch landscape={false} />
-              {shape.map((slot, i) => {
-                const player = byId.get(slots[i]);
-                return (
-                  <div
-                    key={i}
-                    className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1"
-                    style={{ left: `${slot.x}%`, top: `${100 - slot.y}%` }}
-                  >
-                    <Jersey number={player?.number ?? 0} variant={player ? "filled" : "outline"} size={40} />
-                    <span className="rounded-md bg-surface/88 px-1.5 py-0.5 text-[10px] font-medium tracking-wide whitespace-nowrap uppercase">
-                      {player ? player.name.split(" ").slice(-1)[0] : slot.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <AdminPitchBoard entries={entries} onSwap={(from, to) => setSlot(to, slots[from])} />
+
+            <span className="text-center text-[11px] text-muted sm:text-xs">
+              Drag a shirt to move it — drop it on another to swap the two.
+            </span>
           </div>
         </div>
 
         <div className="flex flex-col gap-4">
           <div className={`${ADMIN_CARD} flex flex-col gap-4`}>
-            <div className="flex items-baseline justify-between">
-              <span className={ADMIN_LABEL}>Starting XI</span>
-              <span className={`font-heading text-xs font-semibold tracking-[0.1em] ${filledCount === 11 ? "text-accent" : "text-muted"}`}>
-                {filledCount} / 11 PICKED
-              </span>
-            </div>
-            {/* Keyed by slot range, not label: a label-keyed group remounts when
-                the formation changes, and a freshly mounted <select> loses its
-                value to React's post-action form reset. */}
-            {lineGroups(formation).map((group) => (
-              <div key={group.from} className="flex flex-col gap-2">
-                <span className="font-heading text-[10px] font-medium tracking-[0.14em] text-muted uppercase">{group.label}</span>
-                {shape.slice(group.from, group.to).map((slot, k) => {
-                  const i = group.from + k;
-                  const currentId = slots[i];
-                  const suggested = players.filter((p) => p.position === slot.position);
-                  const rest = players.filter((p) => p.position !== slot.position);
-                  return (
-                    <div key={i} className="grid grid-cols-[48px_minmax(0,1fr)] items-center gap-2.5">
-                      <span className="flex h-[34px] items-center justify-center rounded-md border border-fg/12 bg-surface font-heading text-[11px] font-semibold tracking-[0.08em]">
-                        {slot.label}
-                      </span>
-                      <select
-                        value={currentId}
-                        onChange={(e) => setSlot(i, e.target.value)}
-                        className="h-[34px] cursor-pointer rounded-md border border-fg/14 bg-surface px-2.5 text-sm outline-none focus:border-accent"
-                      >
-                        <option value="">— Select player —</option>
-                        {suggested.length > 0 && (
-                          <optgroup label="Suggested">
-                            {suggested.map((p) => (
-                              <option key={p.id} value={p.id}>
-                                #{p.number} {p.name}
-                                {p.id !== currentId && slots.includes(p.id) ? " · placed" : ""}
-                              </option>
-                            ))}
-                          </optgroup>
-                        )}
-                        {rest.length > 0 && (
-                          <optgroup label="Other">
-                            {rest.map((p) => (
-                              <option key={p.id} value={p.id}>
-                                #{p.number} {p.name} · {p.position}
-                                {p.id !== currentId && slots.includes(p.id) ? " · placed" : ""}
-                              </option>
-                            ))}
-                          </optgroup>
-                        )}
-                      </select>
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
+            <StartingXiPicker formation={formation} slots={slots} players={players} onSelect={setSlot} />
           </div>
 
           <div className={`${ADMIN_CARD} flex flex-col gap-2 ${live ? "border-accent/50" : ""}`}>
@@ -172,7 +116,7 @@ export function AdminShowcaseBuilder({
             </span>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
