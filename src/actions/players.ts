@@ -49,7 +49,7 @@ export async function createPlayer(_prevState: string | null, formData: FormData
   const parsed = PlayerSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return parsed.error.issues[0].message;
 
-  const existing = await prisma.player.findMany({ select: { id: true, number: true } });
+  const existing = await prisma.player.findMany({ select: { id: true, number: true, active: true } });
   if (isNumberTaken(existing, parsed.data.number)) {
     return `Number ${parsed.data.number} is already taken`;
   }
@@ -68,7 +68,7 @@ export async function updatePlayer(id: string, _prevState: string | null, formDa
   const parsed = PlayerSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return parsed.error.issues[0].message;
 
-  const existing = await prisma.player.findMany({ select: { id: true, number: true } });
+  const existing = await prisma.player.findMany({ select: { id: true, number: true, active: true } });
   if (isNumberTaken(existing, parsed.data.number, id)) {
     return `Number ${parsed.data.number} is already taken`;
   }
